@@ -1,5 +1,5 @@
 //
-//  CustomTextField.swift
+//  DiaryTextField.swift
 //  Diary
 //
 //  Created by heerucan on 2022/08/21.
@@ -8,6 +8,8 @@
 import UIKit
 
 class DiaryTextField: UITextField {
+    
+    // MARK: - Enum
     
     enum FieldType {
         case title, date
@@ -22,6 +24,8 @@ class DiaryTextField: UITextField {
         }
     }
     
+    // MARK: - Initializer
+    
     init(_ type: FieldType) {
         super.init(frame: .zero)
         self.placeholder = type.placeholder
@@ -32,7 +36,13 @@ class DiaryTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
-        
+    // MARK: - Configure UI
+    
+    private func configureUI() {
+        makeCornerStyle()
+        borderStyle = .none
+        textAlignment = .center
+        tintColor = .systemOrange
+        textColor = .black
     }
 }
