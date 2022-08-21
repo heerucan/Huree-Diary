@@ -17,9 +17,9 @@ class DiaryTextField: UITextField {
         var placeholder: String {
             switch self {
             case .title:
-                return "제목을 입력해주세요"
+                return Constant.Placeholder.title.rawValue
             case .date:
-                return "날짜를 입력해주세요"
+                return Constant.Placeholder.date.rawValue
             }
         }
     }

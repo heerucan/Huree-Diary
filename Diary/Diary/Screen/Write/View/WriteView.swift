@@ -20,7 +20,7 @@ class WriteView: BaseView {
     
     let imageButton: UIButton = {
         let view = UIButton()
-        view.setBackgroundImage(UIImage(systemName: "camera.circle.fill"), for: .normal)
+        view.setBackgroundImage(UIImage(systemName: Constant.Image.camera.rawValue), for: .normal)
         view.tintColor = .systemGray4
         return view
     }()
@@ -30,7 +30,7 @@ class WriteView: BaseView {
     
     let diaryTextView: UITextView = {
         let view = UITextView()
-        view.text = "일기를 작성해주세요"
+        view.text = Constant.Placeholder.diary.rawValue
         view.textColor = .systemGray3
         view.font = .systemFont(ofSize: 16)
         view.contentInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)

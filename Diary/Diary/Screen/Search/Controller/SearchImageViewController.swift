@@ -22,6 +22,7 @@ final class SearchImageViewController: BaseViewController {
         return view
     }()
     
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     lazy var layout: UICollectionViewFlowLayout = {
        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -31,8 +32,6 @@ final class SearchImageViewController: BaseViewController {
         layout.sectionInset = UIEdgeInsets.zero
         return layout
     }()
-    
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     
     // MARK: - LifeCycle
     
@@ -50,7 +49,6 @@ final class SearchImageViewController: BaseViewController {
     
     override func configureLayout() {
         view.addSubviews([searchBar, collectionView])
-
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()

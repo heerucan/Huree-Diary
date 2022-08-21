@@ -35,7 +35,6 @@ class SearchImageCollectionViewCell: UICollectionViewCell {
     
     private func configureLayout() {
         contentView.addSubview(imageView)
-        
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
