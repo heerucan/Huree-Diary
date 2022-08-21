@@ -7,23 +7,40 @@
 
 import UIKit
 
-class WriteViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+final class WriteViewController: BaseViewController {
+    
+    // MARK: - Property
+    
+    private var writerView = WriteView()
+    
+    // MARK: - LifeCycle
+    
+    override func loadView() {
+        self.view = writerView
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-    */
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    // MARK: - Configure UI & Layout
+    
+    override func configureUI() {
+        super.configureUI()
+        writerView.imageButton.addTarget(self, action: #selector(touchupImageButton(_:)), for: .touchUpInside)
+    }
+    
+    // MARK: - Custom Method
+    
+    
+    // MARK: - @objc
+    
+    @objc func touchupImageButton(_ sender: UIButton) {
+        transitionViewController(SearchImageViewController(), .push)
+    }
 }

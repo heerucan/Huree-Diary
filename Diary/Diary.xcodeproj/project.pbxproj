@@ -24,6 +24,7 @@
 		5BB039B928B2493D009B8DE2 /* SearchImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039B828B2493D009B8DE2 /* SearchImageCollectionViewCell.swift */; };
 		5BB039BB28B2541E009B8DE2 /* DiaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039BA28B2541E009B8DE2 /* DiaryTextField.swift */; };
 		5BB039BE28B25E4F009B8DE2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039BD28B25E4F009B8DE2 /* UIViewController+.swift */; };
+		5BB039C128B2B12D009B8DE2 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039C028B2B12D009B8DE2 /* WriteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		5BB039B828B2493D009B8DE2 /* SearchImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		5BB039BA28B2541E009B8DE2 /* DiaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTextField.swift; sourceTree = "<group>"; };
 		5BB039BD28B25E4F009B8DE2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		5BB039C028B2B12D009B8DE2 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				5BB0399B28B23FA9009B8DE2 /* Base */,
-				5BB0399C28B23FB7009B8DE2 /* Component */,
 				5BB0399628B23F67009B8DE2 /* Extension */,
 				5BB039B328B248F3009B8DE2 /* Protocol.swift */,
 				5BB039B528B24911009B8DE2 /* Constant.swift */,
@@ -190,6 +191,7 @@
 		5BB039A028B23FFF009B8DE2 /* Write */ = {
 			isa = PBXGroup;
 			children = (
+				5BB039C228B2B2D9009B8DE2 /* View */,
 				5BB039A628B24030009B8DE2 /* Controller */,
 			);
 			path = Write;
@@ -217,6 +219,15 @@
 				5BB039B828B2493D009B8DE2 /* SearchImageCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		5BB039C228B2B2D9009B8DE2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5BB0399C28B23FB7009B8DE2 /* Component */,
+				5BB039C028B2B12D009B8DE2 /* WriteView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +310,7 @@
 				5BB039AD28B244FC009B8DE2 /* UIView+.swift in Sources */,
 				5BB039B928B2493D009B8DE2 /* SearchImageCollectionViewCell.swift in Sources */,
 				5BB039A428B24028009B8DE2 /* SearchImageViewController.swift in Sources */,
+				5BB039C128B2B12D009B8DE2 /* WriteView.swift in Sources */,
 				5BB0397E28B23F06009B8DE2 /* AppDelegate.swift in Sources */,
 				5BB0399A28B23F99009B8DE2 /* APIKey.swift in Sources */,
 				5BB039A228B24015009B8DE2 /* WriteViewController.swift in Sources */,
