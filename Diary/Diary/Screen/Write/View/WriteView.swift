@@ -14,14 +14,15 @@ class WriteView: BaseView {
     let photoImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
+        view.backgroundColor = .systemGray6
         view.makeCornerStyle()
         return view
     }()
     
     let imageButton: UIButton = {
         let view = UIButton()
-        view.setBackgroundImage(UIImage(systemName: Constant.Image.camera.rawValue), for: .normal)
-        view.tintColor = .systemGray4
+        view.setBackgroundImage(UIImage(systemName: Constant.Image.photo.rawValue), for: .normal)
+        view.tintColor = .systemGreen
         return view
     }()
     
@@ -34,6 +35,14 @@ class WriteView: BaseView {
         view.textColor = .systemGray3
         view.font = .systemFont(ofSize: 16)
         view.contentInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+        view.makeCornerStyle()
+        return view
+    }()
+    
+    let saveButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("저장하기", for: .normal)
+        view.backgroundColor = .systemGreen
         view.makeCornerStyle()
         return view
     }()
@@ -51,11 +60,12 @@ class WriteView: BaseView {
     // MARK: - Configure UI & Layout
     
     override func configureLayout() {
-        self.addSubviews([imageButton,
-                          photoImageView,
+        self.addSubviews([photoImageView,
+                          imageButton,
                           titleTextField,
                           dateTextField,
-                          diaryTextView])
+                          diaryTextView,
+                          saveButton])
                 
         photoImageView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(10)
@@ -64,10 +74,9 @@ class WriteView: BaseView {
         }
 
         imageButton.snp.makeConstraints { make in
-            make.top.equalTo(photoImageView.snp.top).inset(30)
-            make.leading.equalTo(photoImageView.snp.leading).inset(30)
-            make.bottom.equalTo(photoImageView.snp.bottom).inset(30)
-            make.trailing.equalTo(photoImageView.snp.trailing).inset(30)
+            make.bottom.equalTo(photoImageView.snp.bottom).inset(10)
+            make.trailing.equalTo(photoImageView.snp.trailing).inset(10)
+            make.width.height.equalTo(45)
         }
         
         titleTextField.snp.makeConstraints { make in
@@ -85,7 +94,14 @@ class WriteView: BaseView {
         diaryTextView.snp.makeConstraints { make in
             make.top.equalTo(dateTextField.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(100)
+        }
+        
+        saveButton.snp.makeConstraints { make in
+            make.top.equalTo(diaryTextView.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(10)
+            make.height.equalTo(50)
         }
     }
 }
