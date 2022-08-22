@@ -5,11 +5,30 @@
 //  Created by heerucan on 2022/08/21.
 //
 
-import Foundation
+import UIKit
 
 struct Constant {
-    enum Image: String {
-        case photo = "photo.circle.fill"
+    private init() { }
+    enum Image {
+        case photo
+        case plus
+        
+        var assets: UIImage? {
+            switch self {
+            case .photo:
+                return UIImage(systemName: "photo.circle.fill")
+            case .plus:
+                return UIImage(systemName: "plus")
+            }
+        }
+    }
+    
+    enum Color {
+        static let background = UIColor.systemBackground
+        static let border = UIColor.black.cgColor
+        static let placeholder = UIColor.systemGray3
+        static let point = UIColor.systemGreen
+        static let black = UIColor.black
     }
     
     enum Placeholder: String {
