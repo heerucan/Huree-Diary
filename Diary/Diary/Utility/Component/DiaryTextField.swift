@@ -42,7 +42,8 @@ class DiaryTextField: UITextField {
         makeCornerStyle()
         borderStyle = .none
         textAlignment = .center
-        tintColor = .systemOrange
-        textColor = .black
+        tintColor = Constant.Color.point
+        textColor = Constant.Color.black
+        backgroundColor = Constant.Color.background
     }
 }

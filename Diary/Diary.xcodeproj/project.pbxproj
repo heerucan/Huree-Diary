@@ -23,7 +23,7 @@
 		5BB039B628B24911009B8DE2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039B528B24911009B8DE2 /* Constant.swift */; };
 		5BB039B928B2493D009B8DE2 /* SearchImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039B828B2493D009B8DE2 /* SearchImageCollectionViewCell.swift */; };
 		5BB039BB28B2541E009B8DE2 /* DiaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039BA28B2541E009B8DE2 /* DiaryTextField.swift */; };
-		5BB039BE28B25E4F009B8DE2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039BD28B25E4F009B8DE2 /* UIViewController+.swift */; };
+		5BB039BE28B25E4F009B8DE2 /* Transition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039BD28B25E4F009B8DE2 /* Transition+.swift */; };
 		5BB039C128B2B12D009B8DE2 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039C028B2B12D009B8DE2 /* WriteView.swift */; };
 		5BB039C428B2B58F009B8DE2 /* URLType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039C328B2B58F009B8DE2 /* URLType.swift */; };
 		5BB039C728B2B5BF009B8DE2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5BB039C628B2B5BF009B8DE2 /* Alamofire */; };
@@ -54,7 +54,7 @@
 		5BB039B528B24911009B8DE2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		5BB039B828B2493D009B8DE2 /* SearchImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		5BB039BA28B2541E009B8DE2 /* DiaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTextField.swift; sourceTree = "<group>"; };
-		5BB039BD28B25E4F009B8DE2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		5BB039BD28B25E4F009B8DE2 /* Transition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transition+.swift"; sourceTree = "<group>"; };
 		5BB039C028B2B12D009B8DE2 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 		5BB039C328B2B58F009B8DE2 /* URLType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLType.swift; sourceTree = "<group>"; };
 		5BB039CE28B2B600009B8DE2 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB039AC28B244FC009B8DE2 /* UIView+.swift */,
-				5BB039BD28B25E4F009B8DE2 /* UIViewController+.swift */,
+				5BB039BD28B25E4F009B8DE2 /* Transition+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -373,7 +373,7 @@
 				5BB039B428B248F3009B8DE2 /* Protocol.swift in Sources */,
 				5BB0398028B23F06009B8DE2 /* SceneDelegate.swift in Sources */,
 				5BB039BB28B2541E009B8DE2 /* DiaryTextField.swift in Sources */,
-				5BB039BE28B25E4F009B8DE2 /* UIViewController+.swift in Sources */,
+				5BB039BE28B25E4F009B8DE2 /* Transition+.swift in Sources */,
 				5BB039CF28B2B600009B8DE2 /* ImageManager.swift in Sources */,
 				5BB039EC28B31A2C009B8DE2 /* RealmModel.swift in Sources */,
 				5BB039B628B24911009B8DE2 /* Constant.swift in Sources */,

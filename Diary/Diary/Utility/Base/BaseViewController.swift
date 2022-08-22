@@ -23,10 +23,10 @@ class BaseViewController: UIViewController {
     // MARK: - Configure UI & Layout
     
     func configureUI() {
-        navigationController?.navigationBar.isHidden = true
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.tintColor = Constant.Color.black
         navigationItem.backButtonTitle = ""
-        view.backgroundColor = .white
+        view.backgroundColor = Constant.Color.background
     }
     
     func configureLayout() { }

@@ -14,15 +14,15 @@ class WriteView: BaseView {
     let photoImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = Constant.Color.background
         view.makeCornerStyle()
         return view
     }()
     
     let imageButton: UIButton = {
         let view = UIButton()
-        view.setBackgroundImage(UIImage(systemName: Constant.Image.photo.rawValue), for: .normal)
-        view.tintColor = .systemGreen
+        view.setBackgroundImage(Constant.Image.photo.assets, for: .normal)
+        view.tintColor = Constant.Color.point
         return view
     }()
     
@@ -32,7 +32,7 @@ class WriteView: BaseView {
     let diaryTextView: UITextView = {
         let view = UITextView()
         view.text = Constant.Placeholder.diary.rawValue
-        view.textColor = .systemGray3
+        view.textColor = Constant.Color.placeholder
         view.font = .systemFont(ofSize: 16)
         view.contentInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         view.makeCornerStyle()
@@ -42,7 +42,7 @@ class WriteView: BaseView {
     let saveButton: UIButton = {
         let view = UIButton()
         view.setTitle("저장하기", for: .normal)
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = Constant.Color.point
         view.makeCornerStyle()
         return view
     }()

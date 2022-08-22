@@ -14,20 +14,17 @@ extension UIViewController {
         case push
     }
     
-    func transitionViewController<T: UIViewController>(_ vc: T,
-                                                       _ style: TransitionStyle,
-                                                       completion: ((T) -> Void)? = nil) {
-        let viewController = vc
+    func transition<T: UIViewController>(_ viewController: T,
+                                         _ style: TransitionStyle = .present,
+                                         completion: ((T) -> Void)? = nil) {
         completion?(viewController)
-
+        
         switch style {
         case .present:
             viewController.modalPresentationStyle = .fullScreen
             self.present(viewController, animated: true)
         case .push:
-            let navigationViewController = UINavigationController(rootViewController: WriteViewController())
-
-            navigationViewController.pushViewController(viewController, animated: true)
+            self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }
