@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 
 class SearchImageCollectionViewCell: UICollectionViewCell {
@@ -31,6 +32,7 @@ class SearchImageCollectionViewCell: UICollectionViewCell {
     
     private func configureUI() {
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
     }
     
     private func configureLayout() {
@@ -38,5 +40,11 @@ class SearchImageCollectionViewCell: UICollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    // MARK: - Set Data
+    
+    func setupData(imageURL: URL) {
+        imageView.kf.setImage(with: imageURL)
     }
 }
