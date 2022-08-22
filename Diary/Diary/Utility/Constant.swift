@@ -9,7 +9,7 @@ import Foundation
 
 struct Constant {
     enum Image: String {
-        case camera = "camera.circle.fill"
+        case photo = "photo.circle.fill"
     }
     
     enum Placeholder: String {
