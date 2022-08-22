@@ -105,10 +105,7 @@ extension SearchImageViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
-        print(imageList[indexPath.item])
         index = indexPath.item
-        
     }
 }
 
