@@ -7,11 +7,14 @@
 
 import UIKit
 
+import RealmSwift
+
 final class WriteViewController: BaseViewController {
     
     // MARK: - Property
     
-    private var writerView = WriteView()
+    private let writerView = WriteView()
+    let localRealm = try! Realm() // realm 테이블에 데이터를 CRUD할 때, realm 테이블 경로에 접근
     
     // MARK: - LifeCycle
     
@@ -21,6 +24,7 @@ final class WriteViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Realm is located at:", localRealm.configuration.fileURL!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +37,7 @@ final class WriteViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         writerView.imageButton.addTarget(self, action: #selector(touchupImageButton(_:)), for: .touchUpInside)
+        writerView.saveButton.addTarget(self, action: #selector(touchupSaveButton), for: .touchUpInside)
     }
     
     // MARK: - Custom Method
@@ -42,5 +47,21 @@ final class WriteViewController: BaseViewController {
     
     @objc func touchupImageButton(_ sender: UIButton) {
         transitionViewController(SearchImageViewController(), .push)
+    }
+    
+    @objc func touchupSaveButton() {
+        // Create Record
+        let task = UserDiary(title: "방구뿡방의 일기",
+                             content: "RealmStudio 왜 안열려;",
+                             createdAt: Date(),
+                             updatedAt: Date(),
+                             image: nil)
+        
+        // 오류를 대응하기 위해서 try
+        try! localRealm.write {
+            localRealm.add(task)
+            print("Realm Succeed")
+            dismiss(animated: true)
+        }
     }
 }

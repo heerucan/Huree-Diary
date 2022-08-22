@@ -64,8 +64,8 @@ class WriteView: BaseView {
                           imageButton,
                           titleTextField,
                           dateTextField,
-                          diaryTextView,
-                          saveButton])
+                          saveButton,
+                         diaryTextView])
                 
         photoImageView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(10)
@@ -94,7 +94,6 @@ class WriteView: BaseView {
         diaryTextView.snp.makeConstraints { make in
             make.top.equalTo(dateTextField.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(100)
         }
         
         saveButton.snp.makeConstraints { make in
