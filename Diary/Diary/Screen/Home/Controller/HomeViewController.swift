@@ -88,5 +88,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         else { return UITableViewCell() }
         cell.setupData(data: tasks[indexPath.row])
         return cell
-    }  
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

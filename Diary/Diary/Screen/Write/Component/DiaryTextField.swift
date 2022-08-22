@@ -14,6 +14,15 @@ class DiaryTextField: UITextField {
     enum FieldType {
         case title, date
         
+        var keyboardType: UIKeyboardType {
+            switch self {
+            case .title:
+                return .default
+            case .date:
+                return .numberPad
+            }
+        }
+        
         var placeholder: String {
             switch self {
             case .title:
@@ -28,6 +37,7 @@ class DiaryTextField: UITextField {
     
     init(_ type: FieldType) {
         super.init(frame: .zero)
+        self.keyboardType = type.keyboardType
         self.placeholder = type.placeholder
         configureUI()
     }

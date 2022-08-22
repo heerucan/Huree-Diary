@@ -14,7 +14,7 @@ final class WriteViewController: BaseViewController {
     // MARK: - Property
     
     private let writerView = WriteView()
-    let localRealm = try! Realm() // realm 테이블에 데이터를 CRUD할 때, realm 테이블 경로에 접근
+    private let localRealm = try! Realm() // realm 테이블에 데이터를 CRUD할 때, realm 테이블 경로에 접근
     
     // MARK: - LifeCycle
     
@@ -39,15 +39,27 @@ final class WriteViewController: BaseViewController {
         writerView.saveButton.addTarget(self, action: #selector(touchupSaveButton), for: .touchUpInside)
     }
     
+    override func configureDelegate() {
+        writerView.diaryTextView.delegate = self
+    }
+    
     // MARK: - Custom Method
     
-
-    
+    func changeTextViewColor() {
+        if writerView.diaryTextView.text == Constant.Placeholder.diary.rawValue {
+            writerView.diaryTextView.textColor = Constant.Color.placeholder
+        } else {
+            writerView.diaryTextView.textColor = Constant.Color.black
+        }
+    }
     
     // MARK: - @objc
     
     @objc func touchupImageButton(_ sender: UIButton) {
         let viewController = SearchImageViewController()
+        viewController.imageCompletionHandler = { url in
+            self.writerView.photoImageView.kf.setImage(with: url)
+        }
         transition(viewController, .push)
     }
     
@@ -60,7 +72,8 @@ final class WriteViewController: BaseViewController {
             let task = UserDiary(title: title,
                                  content: content,
                                  createdAt: Date(),
-                                 updatedAt: updatedAt, image: nil)
+                                 updatedAt: updatedAt,
+                                 image: nil)
             
             // 오류를 대응하기 위해서 try
             try! localRealm.write {
@@ -71,5 +84,24 @@ final class WriteViewController: BaseViewController {
         } else {
             print("저장안돼?")
         }
+    }
+}
+
+// MARK: - UITextViewDelegate
+
+extension WriteViewController: UITextViewDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView.textColor == Constant.Color.placeholder {
+            textView.text = ""
+        }
+        changeTextViewColor()
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = Constant.Placeholder.diary.rawValue
+        }
+        changeTextViewColor()
     }
 }

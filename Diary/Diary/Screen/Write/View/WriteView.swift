@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WriteView: BaseView {
+class WriteView: BaseView, UITextViewDelegate {
     
     // MARK: - Property
     
@@ -33,7 +33,8 @@ class WriteView: BaseView {
         let view = UITextView()
         view.text = Constant.Placeholder.diary.rawValue
         view.textColor = Constant.Color.placeholder
-        view.font = .systemFont(ofSize: 16)
+        view.font = .systemFont(ofSize: 18)
+        view.textAlignment = .center
         view.contentInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         view.makeCornerStyle()
         return view

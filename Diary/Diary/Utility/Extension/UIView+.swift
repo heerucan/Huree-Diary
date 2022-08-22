@@ -12,9 +12,12 @@ extension UIView {
         components.forEach { self.addSubview($0) }
     }
     
-    func makeCornerStyle(_ width: CGFloat = 2, _ radius: CGFloat = 10) {
-        layer.borderColor = Constant.Color.border
+    func makeCornerStyle(_ width: CGFloat = 2,
+                         _ color: CGColor? = Constant.Color.border,
+                         _ radius: CGFloat = 10) {
+        layer.borderColor = color
         layer.borderWidth = width
         layer.cornerRadius = radius
+        clipsToBounds = true
     }
 }
