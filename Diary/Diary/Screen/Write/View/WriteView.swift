@@ -66,21 +66,9 @@ class WriteView: BaseView {
                           dateTextField,
                           saveButton,
                          diaryTextView])
-                
-        photoImageView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(10)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(self).multipliedBy(0.4)
-        }
-
-        imageButton.snp.makeConstraints { make in
-            make.bottom.equalTo(photoImageView.snp.bottom).inset(10)
-            make.trailing.equalTo(photoImageView.snp.trailing).inset(10)
-            make.width.height.equalTo(45)
-        }
-        
+           
         titleTextField.snp.makeConstraints { make in
-            make.top.equalTo(photoImageView.snp.bottom).offset(10)
+            make.top.equalTo(self.safeAreaLayoutGuide).inset(10)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
@@ -96,8 +84,20 @@ class WriteView: BaseView {
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
-        saveButton.snp.makeConstraints { make in
+        photoImageView.snp.makeConstraints { make in
             make.top.equalTo(diaryTextView.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(self).multipliedBy(0.4)
+        }
+
+        imageButton.snp.makeConstraints { make in
+            make.bottom.equalTo(photoImageView.snp.bottom).inset(10)
+            make.trailing.equalTo(photoImageView.snp.trailing).inset(10)
+            make.width.height.equalTo(50)
+        }
+                
+        saveButton.snp.makeConstraints { make in
+            make.top.equalTo(photoImageView.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(50)

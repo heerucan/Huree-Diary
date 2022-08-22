@@ -24,7 +24,6 @@ final class WriteViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Realm is located at:", localRealm.configuration.fileURL!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,26 +41,35 @@ final class WriteViewController: BaseViewController {
     
     // MARK: - Custom Method
     
+
+    
     
     // MARK: - @objc
     
     @objc func touchupImageButton(_ sender: UIButton) {
-        transitionViewController(SearchImageViewController(), .push)
+        let viewController = SearchImageViewController()
+        transition(viewController, .push)
     }
     
     @objc func touchupSaveButton() {
         // Create Record
-        let task = UserDiary(title: "방구뿡방의 일기",
-                             content: "RealmStudio 왜 안열려;",
-                             createdAt: Date(),
-                             updatedAt: Date(),
-                             image: nil)
-        
-        // 오류를 대응하기 위해서 try
-        try! localRealm.write {
-            localRealm.add(task)
-            print("Realm Succeed")
-            dismiss(animated: true)
+        if let title = writerView.titleTextField.text,
+           let content = writerView.diaryTextView.text,
+           let updatedAt = writerView.dateTextField.text {
+            
+            let task = UserDiary(title: title,
+                                 content: content,
+                                 createdAt: Date(),
+                                 updatedAt: updatedAt, image: nil)
+            
+            // 오류를 대응하기 위해서 try
+            try! localRealm.write {
+                localRealm.add(task)
+                print("Realm Succeed")
+                dismiss(animated: true)
+            }
+        } else {
+            print("저장안돼?")
         }
     }
 }
