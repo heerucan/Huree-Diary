@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B00C97928B3DA1D00666F12 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B00C97828B3DA1D00666F12 /* HomeTableViewCell.swift */; };
+		5B00C97C28B3E15500666F12 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5B00C97B28B3E15500666F12 /* IQKeyboardManagerSwift */; };
 		5BB0397E28B23F06009B8DE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0397D28B23F06009B8DE2 /* AppDelegate.swift */; };
 		5BB0398028B23F06009B8DE2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0397F28B23F06009B8DE2 /* SceneDelegate.swift */; };
 		5BB0398528B23F06009B8DE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB0398328B23F06009B8DE2 /* Main.storyboard */; };
@@ -37,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B00C97828B3DA1D00666F12 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		5BB0397A28B23F06009B8DE2 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB0397D28B23F06009B8DE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BB0397F28B23F06009B8DE2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B00C97C28B3E15500666F12 /* IQKeyboardManagerSwift in Frameworks */,
 				5BB039E628B31674009B8DE2 /* RealmSwift in Frameworks */,
 				5BB039D828B30B78009B8DE2 /* Kingfisher in Frameworks */,
 				5BB039CA28B2B5CA009B8DE2 /* SwiftyJSON in Frameworks */,
@@ -79,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B00C97728B3DA0400666F12 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5B00C97828B3DA1D00666F12 /* HomeTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		5BB0397128B23F06009B8DE2 = {
 			isa = PBXGroup;
 			children = (
@@ -111,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				5BB0399B28B23FA9009B8DE2 /* Base */,
-				5BB0399C28B23FB7009B8DE2 /* Component */,
 				5BB0399628B23F67009B8DE2 /* Extension */,
 				5BB039B328B248F3009B8DE2 /* Protocol.swift */,
 				5BB039B528B24911009B8DE2 /* Constant.swift */,
@@ -214,6 +225,7 @@
 		5BB039A028B23FFF009B8DE2 /* Write */ = {
 			isa = PBXGroup;
 			children = (
+				5BB0399C28B23FB7009B8DE2 /* Component */,
 				5BB039C228B2B2D9009B8DE2 /* View */,
 				5BB039A628B24030009B8DE2 /* Controller */,
 			);
@@ -263,6 +275,7 @@
 		5BB039ED28B32A8F009B8DE2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				5B00C97728B3DA0400666F12 /* Cell */,
 				5BB039EE28B32A94009B8DE2 /* Controller */,
 			);
 			path = Home;
@@ -299,6 +312,7 @@
 				5BB039D728B30B78009B8DE2 /* Kingfisher */,
 				5BB039E328B31674009B8DE2 /* Realm */,
 				5BB039E528B31674009B8DE2 /* RealmSwift */,
+				5B00C97B28B3E15500666F12 /* IQKeyboardManagerSwift */,
 			);
 			productName = Diary;
 			productReference = 5BB0397A28B23F06009B8DE2 /* Diary.app */;
@@ -334,6 +348,7 @@
 				5BB039C828B2B5CA009B8DE2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				5BB039D628B30B78009B8DE2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				5BB039E228B31674009B8DE2 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				5B00C97A28B3E15500666F12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 5BB0397B28B23F06009B8DE2 /* Products */;
 			projectDirPath = "";
@@ -368,6 +383,7 @@
 				5BB039C128B2B12D009B8DE2 /* WriteView.swift in Sources */,
 				5BB0397E28B23F06009B8DE2 /* AppDelegate.swift in Sources */,
 				5BB039F028B32AA0009B8DE2 /* HomeViewController.swift in Sources */,
+				5B00C97928B3DA1D00666F12 /* HomeTableViewCell.swift in Sources */,
 				5BB0399A28B23F99009B8DE2 /* APIKey.swift in Sources */,
 				5BB039A228B24015009B8DE2 /* WriteViewController.swift in Sources */,
 				5BB039B428B248F3009B8DE2 /* Protocol.swift in Sources */,
@@ -603,6 +619,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5B00C97A28B3E15500666F12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.0;
+			};
+		};
 		5BB039A928B24458009B8DE2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -646,6 +670,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5B00C97B28B3E15500666F12 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5B00C97A28B3E15500666F12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		5BB039AA28B24458009B8DE2 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5BB039A928B24458009B8DE2 /* XCRemoteSwiftPackageReference "SnapKit" */;
