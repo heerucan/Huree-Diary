@@ -22,7 +22,7 @@ extension UIViewController {
 
         switch style {
         case .present:
-            viewController.modalPresentationStyle = .overFullScreen
+            viewController.modalPresentationStyle = .fullScreen
             self.present(viewController, animated: true)
         case .push:
             navigationController?.pushViewController(viewController, animated: true)
