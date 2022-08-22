@@ -14,12 +14,23 @@ class SearchImageCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Property
     
-    let imageView = UIImageView()
+    override var isSelected: Bool {
+        willSet {
+            if newValue {
+                imageView.makeCornerStyle(5, Constant.Color.point.cgColor, 0)
+            } else {
+                imageView.makeCornerStyle(0, nil, 0)
+            }
+        }
+    }
+    
+    private let imageView = UIImageView()
     
     // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.isSelected = false
         configureUI()
         configureLayout()
     }
@@ -41,7 +52,7 @@ class SearchImageCollectionViewCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
     }
-    
+
     // MARK: - Set Data
     
     func setupData(imageURL: URL) {

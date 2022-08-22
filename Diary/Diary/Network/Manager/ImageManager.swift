@@ -13,12 +13,11 @@ import SwiftyJSON
 struct ImageManager {
     private init() { }
     static let shared = ImageManager()
-    typealias imageCompletion = (([URL]) -> Void)
-    typealias searchCompletion = (([URL], Int) -> Void)
+    typealias completion = (([URL]) -> Void)
     
     // MARK: - GET Unsplash Image
     
-    func requestImage(page: Int, imageCompletion: @escaping imageCompletion) {
+    func requestImage(page: Int, completion: @escaping completion) {
         
         let url = URLType.makeURL(.image, page)
         
@@ -27,7 +26,7 @@ struct ImageManager {
             case .success(let value):
                 let json = JSON(value)
                 let imageList = json.arrayValue.map { URL(string: $0["urls"]["small"].stringValue)! }
-                imageCompletion(imageList)
+                completion(imageList)
                 
             case .failure(let error):
                 print(error)
@@ -37,7 +36,7 @@ struct ImageManager {
     
     // MARK: - GET Search Image by query
     
-    func requestSearch(page: Int, query: String, searchCompletion: @escaping searchCompletion) {
+    func requestSearch(page: Int, query: String, completion: @escaping completion) {
         
         let url = URLType.makeURL(.search, page, query)
         
@@ -46,8 +45,7 @@ struct ImageManager {
             case .success(let value):
                 let json = JSON(value)
                 let imageList = json["results"].arrayValue.map { URL(string: $0["urls"]["small"].stringValue)! }
-                let total = json["total"].intValue
-                searchCompletion(imageList, total)
+                completion(imageList)
                 
             case .failure(let error):
                 print(error)
