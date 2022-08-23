@@ -27,7 +27,7 @@ final class HomeViewController: BaseViewController {
     var filterText = ""
     
     var menuItems: [UIAction] {
-        return [recentMenu, oldMenu, titleMenu, filterMenu]
+        return [recentMenu, oldMenu, titleMenu, favoriteMenu, filterMenu]
     }
     
     var menu: UIMenu {
@@ -44,6 +44,10 @@ final class HomeViewController: BaseViewController {
     
     lazy var titleMenu = UIAction(title: "제목순") { _ in
         self.fetchRealmData("title", true)
+    }
+    
+    lazy var favoriteMenu = UIAction(title: "즐겨찾기순", image: Constant.Image.heart.assets) { _ in
+        self.fetchRealmData("favorite", false)
     }
     
     lazy var filterMenu = UIAction(title: "키워드 검색", image: Constant.Image.filter.assets) { _ in
@@ -154,20 +158,26 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    // TableView Editing Mode
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let star = UIContextualAction(style: .normal, title: "⭐️") { _, _, completion in
-            completion(true)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            do {
+                /* realm delete */
+                try? self.localRealm.write {
+                    self.localRealm.delete(self.tasks[indexPath.row])
+                    print("Delete 성공!")
+                }
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
         }
-        star.backgroundColor = Constant.Color.point
-        return UISwipeActionsConfiguration(actions: [star])
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let favorite = UIContextualAction(style: .normal, title: nil) { _, _, completion in
             
-            // realm update
-            try! self.localRealm.write{
+            /* realm update */
+            try! self.localRealm.write {
                 /* 이거는 하나만 바뀜 */
                  self.tasks[indexPath.row].favorite = !self.tasks[indexPath.row].favorite
                 

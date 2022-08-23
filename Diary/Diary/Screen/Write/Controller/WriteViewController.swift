@@ -123,7 +123,7 @@ final class WriteViewController: BaseViewController {
             do {
                 try! localRealm.write {
                     localRealm.add(task)
-                    print("Realm Succeed")
+                    print("Create Realm 성공!")
                     dismiss(animated: true)
                 }
             }
