@@ -38,6 +38,7 @@
 		5BB039E628B31674009B8DE2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5BB039E528B31674009B8DE2 /* RealmSwift */; };
 		5BB039EC28B31A2C009B8DE2 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039EB28B31A2C009B8DE2 /* RealmModel.swift */; };
 		5BB039F028B32AA0009B8DE2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039EF28B32AA0009B8DE2 /* HomeViewController.swift */; };
+		5BC1FF1A28B49EDF00B144CD /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1FF1928B49EDF00B144CD /* ViewType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		5BB039CE28B2B600009B8DE2 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		5BB039EB28B31A2C009B8DE2 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		5BB039EF28B32AA0009B8DE2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5BC1FF1928B49EDF00B144CD /* ViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,8 +130,9 @@
 			children = (
 				5BB0399B28B23FA9009B8DE2 /* Base */,
 				5BB0399628B23F67009B8DE2 /* Extension */,
-				5BB039B328B248F3009B8DE2 /* Protocol.swift */,
 				5BB039B528B24911009B8DE2 /* Constant.swift */,
+				5BB039B328B248F3009B8DE2 /* Protocol.swift */,
+				5BC1FF1928B49EDF00B144CD /* ViewType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -178,9 +181,9 @@
 			isa = PBXGroup;
 			children = (
 				5BB039AC28B244FC009B8DE2 /* UIView+.swift */,
+				5B00C98D28B461F100666F12 /* UIViewController+.swift */,
 				5BB039BD28B25E4F009B8DE2 /* Transition+.swift */,
 				5B00C98B28B45BF400666F12 /* Date+.swift */,
-				5B00C98D28B461F100666F12 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				5BB039BE28B25E4F009B8DE2 /* Transition+.swift in Sources */,
 				5B00C98E28B461F100666F12 /* UIViewController+.swift in Sources */,
 				5BB039CF28B2B600009B8DE2 /* ImageManager.swift in Sources */,
+				5BC1FF1A28B49EDF00B144CD /* ViewType.swift in Sources */,
 				5BB039EC28B31A2C009B8DE2 /* RealmModel.swift in Sources */,
 				5BB039B628B24911009B8DE2 /* Constant.swift in Sources */,
 				5BB039C428B2B58F009B8DE2 /* URLType.swift in Sources */,

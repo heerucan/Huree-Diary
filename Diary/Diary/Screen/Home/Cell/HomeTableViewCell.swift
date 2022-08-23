@@ -42,7 +42,6 @@ class HomeTableViewCell: UITableViewCell {
         view.clipsToBounds = true
         view.backgroundColor = Constant.Color.point
         view.tintColor = Constant.Color.background
-        view.makeCornerStyle()
         return view
     }()
     

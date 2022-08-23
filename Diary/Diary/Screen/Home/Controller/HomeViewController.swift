@@ -33,9 +33,13 @@ final class HomeViewController: BaseViewController {
     lazy var plusBarButton = UIBarButtonItem(image: Constant.Image.plus.assets,
                                               style: .done, target: self,
                                               action: #selector(touchupPlusBarButton))
-    let homeTableView: UITableView = {
+    
+    lazy var homeTableView: UITableView = {
         let view = UITableView()
         view.rowHeight = 100
+        view.delegate = self
+        view.dataSource = self
+        view.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.id)
         return view
     }()
     
@@ -64,12 +68,6 @@ final class HomeViewController: BaseViewController {
         homeTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-    }
-    
-    override func configureDelegate() {
-        homeTableView.delegate = self
-        homeTableView.dataSource = self
-        homeTableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.id)
     }
     
     // MARK: - Custom Method
@@ -136,6 +134,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let viewController = UINavigationController(rootViewController: WriteViewController())
+        
+        transition(viewController, .present) { viewController in
+            guard let view = viewController.viewControllers.last as? WriteViewController else { return }
+            view.viewType = .Edit
+            view.writerView.setupData(data: self.tasks[indexPath.row])
+        }
     }
     
     // TableView Editing Mode

@@ -11,14 +11,20 @@ struct Constant {
     private init() { }
     enum Image {
         case photo
+        case image
         case plus
+        case close
         
         var assets: UIImage? {
             switch self {
             case .photo:
                 return UIImage(systemName: "photo.circle.fill")
+            case .image:
+                return UIImage(systemName: "photo.circle")
             case .plus:
                 return UIImage(systemName: "plus")
+            case .close:
+                return UIImage(systemName: "xmark")
             }
         }
     }
@@ -29,6 +35,7 @@ struct Constant {
         static let placeholder = UIColor.systemGray3
         static let point = UIColor.systemGreen
         static let black = UIColor.black
+        static let lightGray = UIColor.systemGray5
     }
     
     enum Placeholder: String {
