@@ -22,7 +22,7 @@ class HomeTableViewCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 16)
+        view.font = .boldSystemFont(ofSize: 16)
         view.textColor = Constant.Color.black
         view.textAlignment = .left
         return view
