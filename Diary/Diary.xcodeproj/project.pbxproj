@@ -39,6 +39,7 @@
 		5BB039EC28B31A2C009B8DE2 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039EB28B31A2C009B8DE2 /* RealmModel.swift */; };
 		5BB039F028B32AA0009B8DE2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039EF28B32AA0009B8DE2 /* HomeViewController.swift */; };
 		5BC1FF1A28B49EDF00B144CD /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1FF1928B49EDF00B144CD /* ViewType.swift */; };
+		5BD5513628B54ED40045A62A /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5513528B54ED40045A62A /* ErrorType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		5BB039EB28B31A2C009B8DE2 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		5BB039EF28B32AA0009B8DE2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5BC1FF1928B49EDF00B144CD /* ViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewType.swift; sourceTree = "<group>"; };
+		5BD5513528B54ED40045A62A /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 			children = (
 				5BB0399928B23F99009B8DE2 /* APIKey.swift */,
 				5BB039C328B2B58F009B8DE2 /* URLType.swift */,
+				5BD5513528B54ED40045A62A /* ErrorType.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				5BB039A428B24028009B8DE2 /* SearchImageViewController.swift in Sources */,
 				5BB039C128B2B12D009B8DE2 /* WriteView.swift in Sources */,
 				5BB0397E28B23F06009B8DE2 /* AppDelegate.swift in Sources */,
+				5BD5513628B54ED40045A62A /* ErrorType.swift in Sources */,
 				5BB039F028B32AA0009B8DE2 /* HomeViewController.swift in Sources */,
 				5B00C97928B3DA1D00666F12 /* HomeTableViewCell.swift in Sources */,
 				5B00C98C28B45BF400666F12 /* Date+.swift in Sources */,
