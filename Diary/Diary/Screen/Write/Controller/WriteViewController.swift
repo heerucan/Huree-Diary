@@ -11,17 +11,20 @@ import PhotosUI
 import RealmSwift
 
 final class WriteViewController: BaseViewController {
+        
+    // MARK: - Realm
+    
+    private let localRealm = try! Realm() // realm 테이블에 데이터를 CRUD할 때, realm 테이블 경로에 접근
     
     // MARK: - Property
     
-    private let localRealm = try! Realm() // realm 테이블에 데이터를 CRUD할 때, realm 테이블 경로에 접근
-
     var viewType: ViewType = .Write
     let writerView = WriteView()
     
     lazy var closeButton = UIBarButtonItem(image: Constant.Image.close.assets,
-                                              style: .done, target: self,
-                                              action: #selector(touchupCloseButton))
+                                           style: .done,
+                                           target: self,
+                                           action: #selector(touchupCloseButton))
     
     // MARK: - LifeCycle
     

@@ -14,6 +14,7 @@ struct Constant {
         case image
         case plus
         case close
+        case menu
         
         var assets: UIImage? {
             switch self {
@@ -25,6 +26,8 @@ struct Constant {
                 return UIImage(systemName: "plus")
             case .close:
                 return UIImage(systemName: "xmark")
+            case .menu:
+                return UIImage(systemName: "ellipsis.circle")
             }
         }
     }

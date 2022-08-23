@@ -12,7 +12,7 @@ import Kingfisher
 
 final class HomeViewController: BaseViewController {
     
-    // MARK: - Property
+    // MARK: - Realm
         
     let localRealm = try! Realm() // 2. Realm 경로 가져오기
     var tasks: Results<UserDiary>! { // 3. Realm 데이터를 담을 배열 만들기
@@ -22,13 +22,39 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    lazy var sortBarButton = UIBarButtonItem(title: "정렬",
-                                              style: .done, target: self,
-                                              action: #selector(touchupSortBarButton))
+    // MARK: - Property
     
-    lazy var filterBarButton = UIBarButtonItem(title: "필터",
-                                              style: .done, target: self,
-                                              action: #selector(touchupFilterBarButton))
+    var menuItems: [UIAction] {
+        return [recentMenu, oldMenu, titleMenu, filterMenu]
+    }
+    
+    var menu: UIMenu {
+        return UIMenu(title: "정렬 및 필터", children: menuItems)
+    }
+    
+    lazy var recentMenu = UIAction(title: "최신순") { _ in
+        self.fetchRealmData("createdAt", false)
+    }
+    
+    lazy var oldMenu = UIAction(title: "오래된순") { _ in
+        self.fetchRealmData()
+    }
+    
+    lazy var titleMenu = UIAction(title: "제목순") { _ in
+        self.fetchRealmData("title", true)
+    }
+    
+    lazy var filterMenu = UIAction(title: "필터") { [weak self] _ in
+        guard let self = self else { return }
+        /* 특정 키워드(우왕) 기준으로 필터해주고, ' ' 따옴표가 있어야 한다.
+         self.tasks = localRealm.objects(UserDiary.self).filter("title = '우왕'")
+         [c] 는 대소문자 여부 상관없이 검색해줌 */
+        self.tasks = self.localRealm.objects(UserDiary.self).filter("title CONTAINS[c] 'A'")
+    }
+    
+    lazy var leftBarButton = UIBarButtonItem(image: Constant.Image.menu.assets,
+                                             primaryAction: nil,
+                                             menu: menu)
     
     lazy var plusBarButton = UIBarButtonItem(image: Constant.Image.plus.assets,
                                               style: .done, target: self,
@@ -51,15 +77,15 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchRealmData(keyPath: "title", ascending: true)
+        fetchRealmData("title", true)
     }
     
     // MARK: - Configure UI & Layout
     
     override func configureUI() {
         super.configureUI()
-        navigationItem.title = "🥳 후리방구 일기장 🍯"
-        navigationItem.leftBarButtonItems = [sortBarButton, filterBarButton]
+        navigationItem.title = "후리방구 일기장"
+        navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = plusBarButton
     }
 
@@ -72,46 +98,13 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Custom Method
     
-    func fetchRealmData(keyPath: String = "createdAt", ascending: Bool = false) {
+    func fetchRealmData(_ keyPath: String = "createdAt", _ ascending: Bool = false) {
         // 4. Realm의 데이터를 정렬해서 배열에 담기
         self.tasks = localRealm.objects(UserDiary.self).sorted(byKeyPath: keyPath, ascending: ascending)
     }
     
     // MARK: - @objc
-    
-    @objc func touchupSortBarButton() {
-        // 데이터가 변화되는 시점마다 테이블뷰가 갱신되어야 한다. -> 매번 해주는 것보다 tasks에 프로퍼티 옵저버로 해주자!
-        let alert = UIAlertController(title: "정렬",
-                                      message: nil,
-                                      preferredStyle: .actionSheet)
-        let old = UIAlertAction(title: "오래된순", style: .default) { [weak self] action in
-            guard let self = self else { return }
-            self.fetchRealmData(keyPath: "createdAt", ascending: true)
-        }
-        let recent = UIAlertAction(title: "최신순", style: .default) { [weak self] action in
-            guard let self = self else { return }
-            self.fetchRealmData(keyPath: "createdAt", ascending: false)
-        }
-        let title = UIAlertAction(title: "제목순", style: .default) { [weak self] action in
-            guard let self = self else { return }
-            self.fetchRealmData(keyPath: "title", ascending: true)
-        }
-        
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        alert.addAction(old)
-        alert.addAction(recent)
-        alert.addAction(title)
-        alert.addAction(cancel)
-        present(alert, animated: true)
-    }
-    
-    @objc func touchupFilterBarButton() {
-        /* 특정 키워드(우왕) 기준으로 필터해주고, ' ' 따옴표가 있어야 한다.
-         self.tasks = localRealm.objects(UserDiary.self).filter("title = '우왕'")
-         [c] 는 대소문자 여부 상관없이 검색해줌 */
-        self.tasks = localRealm.objects(UserDiary.self).filter("title CONTAINS[c] 'A'")
-    }
-    
+
     @objc func touchupPlusBarButton() {
         let viewController = UINavigationController(rootViewController: WriteViewController())
         transition(viewController)
