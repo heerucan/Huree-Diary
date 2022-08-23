@@ -59,6 +59,15 @@ final class WriteViewController: BaseViewController {
         }
     }
     
+    func presentImagePicker() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.allowsEditing = true
+        picker.mediaTypes = ["public.image"]
+        picker.delegate = self
+        self.present(picker, animated: true)
+    }
+    
     func presentPHPhotoPicker() {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 1
@@ -80,6 +89,7 @@ final class WriteViewController: BaseViewController {
     @objc func touchupImageButton(_ sender: UIButton) {
         showAlert("이미지 가져오기", button1: "카메라", button2: "갤러리", button3: "검색") { [weak self] action in
             guard let self = self else { return }
+            self.presentImagePicker()
             
         } handler2: { [weak self] action in
             guard let self = self else { return }
@@ -134,9 +144,10 @@ extension WriteViewController: UITextViewDelegate {
     }
 }
 
-// MARK: - PHPickerViewControllerDelegate
+// MARK: - PHPickerViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 
-extension WriteViewController: PHPickerViewControllerDelegate {
+extension WriteViewController: PHPickerViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    // PHPickerViewControllerDelegate
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true) {
             if let itemProvider = results.first?.itemProvider,
@@ -148,5 +159,15 @@ extension WriteViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
+    }
+    
+    // UIImagePickerControllerDelegate, UINavigationControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            picker.dismiss(animated: true)
+            return
+        }
+        self.writerView.photoImageView.image = image
+        picker.dismiss(animated: true, completion: nil)
     }
 }
