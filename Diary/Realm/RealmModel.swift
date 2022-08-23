@@ -20,7 +20,7 @@ class UserDiary: Object {
     @Persisted var title: String
     @Persisted var content: String?
     @Persisted var createdAt = Date() // 작성 날짜
-    @Persisted var updatedAt: String? // 일기의 진짜 날짜
+    @Persisted var updatedAt = Date() // 일기의 진짜 날짜
     @Persisted var favorite: Bool // 즐겨찾기
     @Persisted var image: String?
     
@@ -30,7 +30,7 @@ class UserDiary: Object {
     convenience init(title: String,
                      content: String?,
                      createdAt: Date,
-                     updatedAt: String?,
+                     updatedAt: Date,
                      image: String?) {
         self.init()
         self.title = title
