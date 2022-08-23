@@ -30,6 +30,15 @@ class WriteView: BaseView, UITextViewDelegate {
         return view
     }()
     
+    lazy var datePickerView: UIDatePicker = {
+        let view = UIDatePicker(frame: .zero)
+        view.preferredDatePickerStyle = .wheels
+        view.datePickerMode = .date
+        view.locale = Locale(identifier: "Ko-kr")
+        view.maximumDate = .now
+        return view
+    }()
+    
     let titleTextField = DiaryTextField(.title)
     let dateTextField = DiaryTextField(.date)
     
@@ -61,6 +70,10 @@ class WriteView: BaseView, UITextViewDelegate {
     }
     
     // MARK: - Configure UI & Layout
+    
+    override func configureUI() {
+        dateTextField.inputView = datePickerView
+    }
     
     override func configureLayout() {
         self.addSubviews([photoImageView,

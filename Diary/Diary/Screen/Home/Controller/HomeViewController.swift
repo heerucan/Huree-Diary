@@ -168,21 +168,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             
             // realm update
             try! self.localRealm.write{
-                /* 이거는 하나만 바뀜
-                 self.tasks[indexPath.row].favorite = !self.tasks[indexPath.row].favorite */
+                /* 이거는 하나만 바뀜 */
+                 self.tasks[indexPath.row].favorite = !self.tasks[indexPath.row].favorite
                 
                 /* 하나의 테이블에 특정 컬럼 전체를 변경
                  => 하나만 바꾸면 다른 것도 다 바뀜
                  self.tasks.setValue(true, forKey: "favorite") */
                 
                 /* 하나의 레코드에서 여러 컬럼들이 변경
-                 => 루희야 이거 컬럼이야! 다른 레코드가 아님! 컬럼들이 바뀐다고!! */
+                 => 루희야 이거 컬럼이야! 다른 레코드가 아님! 컬럼들이 바뀐다고!!
                 self.localRealm.create(UserDiary.self,
                                        value: [
                                         "objectId": self.tasks[indexPath.row].objectId,
                                         "content": "내용 변경 테스트",
                                         "title": "제목 변경 테스트"],
-                                       update: .modified)
+                                       update: .modified)*/
             }
             
             // 하나의 record에서 하나만 reload하니까 상대적으로 효율적임 -> 이게 좀 더 스무스하긴 하네.. 내 취향이네..

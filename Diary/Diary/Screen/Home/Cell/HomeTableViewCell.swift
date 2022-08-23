@@ -93,7 +93,7 @@ class HomeTableViewCell: UITableViewCell {
     func setupData(data: UserDiary) {
         diaryImageView.image = data.image == nil ?
         Constant.Image.photo.assets : UIImage(named: data.image!)
-        dateLabel.text = data.updatedAt.toString()
+        dateLabel.text = data.updatedAt
         titleLabel.text = data.title
         contentLabel.text = data.content
     }

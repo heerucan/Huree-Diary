@@ -46,6 +46,7 @@ final class WriteViewController: BaseViewController {
         writerView.diaryTextView.textColor = viewType.textColor
         writerView.imageButton.addTarget(self, action: #selector(touchupImageButton(_:)), for: .touchUpInside)
         writerView.saveButton.addTarget(self, action: #selector(touchupSaveButton), for: .touchUpInside)
+        writerView.datePickerView.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
     }
     
     override func configureDelegate() {
@@ -82,6 +83,10 @@ final class WriteViewController: BaseViewController {
     
     // MARK: - @objc
     
+    @objc func handleDatePicker(_ sender: UIDatePicker) {
+        writerView.dateTextField.text = sender.date.toString()
+    }
+    
     @objc func touchupCloseButton() {
         let presentingViewController = HomeViewController()
         dismiss(animated: true) {
@@ -90,13 +95,13 @@ final class WriteViewController: BaseViewController {
     }
     
     @objc func touchupImageButton(_ sender: UIButton) {
-        showAlert("이미지 가져오기", button1: "카메라", button2: "갤러리", button3: "검색") { action in
+        showAlert("이미지 가져오기", button1: "카메라", button2: "갤러리", button3: "검색") { _ in
             self.presentImagePicker()
             
-        } handler2: { action in
+        } handler2: { _ in
             self.presentPHPhotoPicker()
             
-        } handler3: { action in
+        } handler3: { _ in
             let viewController = SearchImageViewController()
             viewController.imageCompletionHandler = { url in
                 self.writerView.photoImageView.kf.setImage(with: url)
@@ -108,11 +113,12 @@ final class WriteViewController: BaseViewController {
     @objc func touchupSaveButton() {
         // Create Record
         if let title = writerView.titleTextField.text,
+           let date = writerView.dateTextField.text,
            let content = writerView.diaryTextView.text {
             let task = UserDiary(title: title,
                                  content: content,
                                  createdAt: Date(),
-                                 updatedAt: Date(),
+                                 updatedAt: date,
                                  image: nil)
             do {
                 try! localRealm.write {
