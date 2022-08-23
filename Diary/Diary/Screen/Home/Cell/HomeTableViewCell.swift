@@ -13,18 +13,26 @@ class HomeTableViewCell: UITableViewCell {
     
     // MARK: - Property
     
+    private let dateLabel: UILabel = {
+        let view = UILabel()
+        view.font = .systemFont(ofSize: 13)
+        view.textColor = Constant.Color.black
+        return view
+    }()
+    
     private let titleLabel: UILabel = {
         let view = UILabel()
-        view.font = .boldSystemFont(ofSize: 18)
+        view.font = .systemFont(ofSize: 16)
         view.textColor = Constant.Color.black
         view.textAlignment = .left
         return view
     }()
     
-    private let dateLabel: UILabel = {
+    private let contentLabel: UILabel = {
         let view = UILabel()
-        view.font = .boldSystemFont(ofSize: 15)
+        view.font = .systemFont(ofSize: 14)
         view.textColor = Constant.Color.black
+        view.textAlignment = .left
         return view
     }()
     
@@ -32,7 +40,7 @@ class HomeTableViewCell: UITableViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
-        view.backgroundColor = Constant.Color.black
+        view.backgroundColor = Constant.Color.point
         view.tintColor = Constant.Color.background
         view.makeCornerStyle()
         return view
@@ -53,22 +61,31 @@ class HomeTableViewCell: UITableViewCell {
     
     private func configureLayout() {
         contentView.addSubviews([diaryImageView,
+                                 dateLabel,
                                 titleLabel,
-                                dateLabel])
+                                contentLabel])
         diaryImageView.snp.makeConstraints { make in
-            make.top.leading.bottom.equalToSuperview().inset(20)
-            make.width.height.equalTo(50)
+            make.top.bottom.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().inset(20)
+            make.width.height.equalTo(80)
         }
         
         dateLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(22)
+            make.top.equalTo(diaryImageView.snp.top).inset(9)
             make.leading.equalTo(diaryImageView.snp.trailing).offset(15)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(5)
+            make.centerY.equalTo(diaryImageView.snp.centerY)
             make.leading.equalTo(diaryImageView.snp.trailing).offset(15)
             make.trailing.equalToSuperview().inset(20)
+        }
+        
+        contentLabel.snp.makeConstraints { make in
+            make.leading.equalTo(diaryImageView.snp.trailing).offset(15)
+            make.bottom.equalTo(diaryImageView.snp.bottom).inset(6)
+            make.trailing.equalToSuperview().inset(20)
+
         }
     }
     
@@ -77,7 +94,8 @@ class HomeTableViewCell: UITableViewCell {
     func setupData(data: UserDiary) {
         diaryImageView.image = data.image == nil ?
         UIImage(systemName: "photo") : UIImage(named: data.image!)
-        dateLabel.text = "날짜 : " + data.updatedAt!
-        titleLabel.text = "제목 : " + data.title
+        dateLabel.text = data.updatedAt.toString()
+        titleLabel.text = data.title
+        contentLabel.text = data.content
     }
 }

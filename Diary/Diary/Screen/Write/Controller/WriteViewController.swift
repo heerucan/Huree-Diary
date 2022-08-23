@@ -72,7 +72,7 @@ final class WriteViewController: BaseViewController {
             let task = UserDiary(title: title,
                                  content: content,
                                  createdAt: Date(),
-                                 updatedAt: updatedAt,
+                                 updatedAt: Date(),
                                  image: nil)
             
             // 오류를 대응하기 위해서 try
