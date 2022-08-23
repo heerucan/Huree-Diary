@@ -90,16 +90,13 @@ final class WriteViewController: BaseViewController {
     }
     
     @objc func touchupImageButton(_ sender: UIButton) {
-        showAlert("이미지 가져오기", button1: "카메라", button2: "갤러리", button3: "검색") { [weak self] action in
-            guard let self = self else { return }
+        showAlert("이미지 가져오기", button1: "카메라", button2: "갤러리", button3: "검색") { action in
             self.presentImagePicker()
             
-        } handler2: { [weak self] action in
-            guard let self = self else { return }
+        } handler2: { action in
             self.presentPHPhotoPicker()
             
-        } handler3: { [weak self] action in
-            guard let self = self else { return }
+        } handler3: { action in
             let viewController = SearchImageViewController()
             viewController.imageCompletionHandler = { url in
                 self.writerView.photoImageView.kf.setImage(with: url)

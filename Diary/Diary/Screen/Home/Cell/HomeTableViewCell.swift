@@ -13,14 +13,14 @@ class HomeTableViewCell: UITableViewCell {
     
     // MARK: - Property
     
-    private let dateLabel: UILabel = {
+    let dateLabel: UILabel = {
         let view = UILabel()
         view.font = .systemFont(ofSize: 13)
         view.textColor = Constant.Color.black
         return view
     }()
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let view = UILabel()
         view.font = .boldSystemFont(ofSize: 16)
         view.textColor = Constant.Color.black
@@ -28,7 +28,7 @@ class HomeTableViewCell: UITableViewCell {
         return view
     }()
     
-    private let contentLabel: UILabel = {
+    let contentLabel: UILabel = {
         let view = UILabel()
         view.font = .systemFont(ofSize: 14)
         view.textColor = Constant.Color.black
@@ -36,7 +36,7 @@ class HomeTableViewCell: UITableViewCell {
         return view
     }()
     
-    private let diaryImageView: UIImageView = {
+    let diaryImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
@@ -62,8 +62,8 @@ class HomeTableViewCell: UITableViewCell {
     private func configureLayout() {
         contentView.addSubviews([diaryImageView,
                                  dateLabel,
-                                titleLabel,
-                                contentLabel])
+                                 titleLabel,
+                                 contentLabel])
         diaryImageView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(10)
             make.leading.equalToSuperview().inset(20)
@@ -85,7 +85,6 @@ class HomeTableViewCell: UITableViewCell {
             make.leading.equalTo(diaryImageView.snp.trailing).offset(15)
             make.bottom.equalTo(diaryImageView.snp.bottom).inset(6)
             make.trailing.equalToSuperview().inset(20)
-
         }
     }
     
@@ -93,7 +92,7 @@ class HomeTableViewCell: UITableViewCell {
     
     func setupData(data: UserDiary) {
         diaryImageView.image = data.image == nil ?
-        UIImage(systemName: "photo") : UIImage(named: data.image!)
+        Constant.Image.photo.assets : UIImage(named: data.image!)
         dateLabel.text = data.updatedAt.toString()
         titleLabel.text = data.title
         contentLabel.text = data.content

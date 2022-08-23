@@ -15,6 +15,7 @@ struct Constant {
         case plus
         case close
         case menu
+        case filter
         
         var assets: UIImage? {
             switch self {
@@ -28,6 +29,8 @@ struct Constant {
                 return UIImage(systemName: "xmark")
             case .menu:
                 return UIImage(systemName: "ellipsis.circle")
+            case .filter:
+                return UIImage(systemName: "eyes")
             }
         }
     }
@@ -46,5 +49,6 @@ struct Constant {
         case diary = "일기를 작성해주세요"
         case title = "제목을 작성해주세요"
         case date = "날짜를 작성해주세요"
+        case filter = "찾고 싶은 일기의 키워드를 입력하세요"
     }
 }

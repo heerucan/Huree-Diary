@@ -13,7 +13,7 @@ import Kingfisher
 final class HomeViewController: BaseViewController {
     
     // MARK: - Realm
-        
+    
     let localRealm = try! Realm() // 2. Realm 경로 가져오기
     var tasks: Results<UserDiary>! { // 3. Realm 데이터를 담을 배열 만들기
         didSet { // 해당 프로퍼티의 값이 변화되는 시점마다 테이블뷰가 갱신될 것
@@ -24,12 +24,14 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Property
     
+    var filterText = ""
+    
     var menuItems: [UIAction] {
         return [recentMenu, oldMenu, titleMenu, filterMenu]
     }
     
     var menu: UIMenu {
-        return UIMenu(title: "정렬 및 필터", children: menuItems)
+        return UIMenu(title: "정렬 및 검색", children: menuItems)
     }
     
     lazy var recentMenu = UIAction(title: "최신순") { _ in
@@ -44,12 +46,29 @@ final class HomeViewController: BaseViewController {
         self.fetchRealmData("title", true)
     }
     
-    lazy var filterMenu = UIAction(title: "필터") { [weak self] _ in
-        guard let self = self else { return }
-        /* 특정 키워드(우왕) 기준으로 필터해주고, ' ' 따옴표가 있어야 한다.
-         self.tasks = localRealm.objects(UserDiary.self).filter("title = '우왕'")
-         [c] 는 대소문자 여부 상관없이 검색해줌 */
-        self.tasks = self.localRealm.objects(UserDiary.self).filter("title CONTAINS[c] 'A'")
+    lazy var filterMenu = UIAction(title: "키워드 검색", image: Constant.Image.filter.assets) { _ in
+        let alert = UIAlertController(title: "키워드 검색", message: nil, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = Constant.Placeholder.filter.rawValue
+        }
+        
+        let ok = UIAlertAction(title: "확인", style: .default) { action in
+            guard let textFields = alert.textFields else { return }
+            guard let text = textFields[0].text else { return }
+            //특정 키워드 기준으로 필터해주고, ' ' 따옴표가 있어야 한다.
+            self.tasks = self.localRealm.objects(UserDiary.self).filter("title CONTAINS '"+text+"'" )
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .default)
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        self.present(alert, animated: true)
+        
+        /* [c] 는 대소문자 여부 상관없이 검색해줌
+         self.tasks = self.localRealm.objects(UserDiary.self).filter("title CONTAINS[c] 'A'")
+         = 은 무조건 같아야만 검색해줌
+         self.tasks = self.localRealm.objects(UserDiary.self).filter("title = 'A'")
+         */
     }
     
     lazy var leftBarButton = UIBarButtonItem(image: Constant.Image.menu.assets,
@@ -57,8 +76,8 @@ final class HomeViewController: BaseViewController {
                                              menu: menu)
     
     lazy var plusBarButton = UIBarButtonItem(image: Constant.Image.plus.assets,
-                                              style: .done, target: self,
-                                              action: #selector(touchupPlusBarButton))
+                                             style: .done, target: self,
+                                             action: #selector(touchupPlusBarButton))
     
     lazy var homeTableView: UITableView = {
         let view = UITableView()
@@ -77,7 +96,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchRealmData("title", true)
+        fetchRealmData()
     }
     
     // MARK: - Configure UI & Layout
@@ -88,7 +107,7 @@ final class HomeViewController: BaseViewController {
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = plusBarButton
     }
-
+    
     override func configureLayout() {
         view.addSubview(homeTableView)
         homeTableView.snp.makeConstraints { make in
@@ -98,13 +117,13 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Custom Method
     
-    func fetchRealmData(_ keyPath: String = "createdAt", _ ascending: Bool = false) {
+    func fetchRealmData(_ keyPath: String = "createdAt", _ ascending: Bool = true) {
         // 4. Realm의 데이터를 정렬해서 배열에 담기
         self.tasks = localRealm.objects(UserDiary.self).sorted(byKeyPath: keyPath, ascending: ascending)
     }
     
     // MARK: - @objc
-
+    
     @objc func touchupPlusBarButton() {
         let viewController = UINavigationController(rootViewController: WriteViewController())
         transition(viewController)
@@ -128,7 +147,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let viewController = UINavigationController(rootViewController: WriteViewController())
-        
         transition(viewController, .present) { viewController in
             guard let view = viewController.viewControllers.last as? WriteViewController else { return }
             view.viewType = .Edit
