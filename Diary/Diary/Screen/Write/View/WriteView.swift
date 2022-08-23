@@ -7,14 +7,18 @@
 
 import UIKit
 
+import Kingfisher
+
 class WriteView: BaseView, UITextViewDelegate {
     
     // MARK: - Property
-    
+        
     let photoImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.backgroundColor = Constant.Color.background
+        view.image = Constant.Image.image.assets
+        view.tintColor = Constant.Color.lightGray
         view.makeCornerStyle()
         return view
     }()
@@ -29,10 +33,9 @@ class WriteView: BaseView, UITextViewDelegate {
     let titleTextField = DiaryTextField(.title)
     let dateTextField = DiaryTextField(.date)
     
-    let diaryTextView: UITextView = {
+    lazy var diaryTextView: UITextView = {
         let view = UITextView()
         view.text = Constant.Placeholder.diary.rawValue
-        view.textColor = Constant.Color.placeholder
         view.font = .systemFont(ofSize: 18)
         view.textAlignment = .center
         view.contentInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
@@ -42,7 +45,6 @@ class WriteView: BaseView, UITextViewDelegate {
     
     let saveButton: UIButton = {
         let view = UIButton()
-        view.setTitle("저장하기", for: .normal)
         view.backgroundColor = Constant.Color.point
         view.makeCornerStyle()
         return view
@@ -103,5 +105,15 @@ class WriteView: BaseView, UITextViewDelegate {
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(50)
         }
+    }
+    
+    // MARK: - Set Data
+    
+    func setupData(data: UserDiary) {
+        let image = data.image == nil ? Constant.Image.image.assets : UIImage(named: data.image!)
+        titleTextField.text = data.title
+        dateTextField.text = data.createdAt.toString()
+        diaryTextView.text = data.content
+        photoImageView.image = image
     }
 }

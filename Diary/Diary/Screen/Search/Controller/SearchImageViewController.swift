@@ -24,10 +24,11 @@ final class SearchImageViewController: BaseViewController {
         target: self,
         action: #selector(touchupRightBarButton))
     
-    let searchBar: UISearchBar = {
+    lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
         view.placeholder = Constant.Placeholder.searchBar.rawValue
         view.tintColor = Constant.Color.point
+        view.delegate = self
         return view
     }()
     
