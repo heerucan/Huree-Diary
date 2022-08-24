@@ -14,17 +14,17 @@ class SearchImageCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Property
     
-    override var isSelected: Bool {
-        willSet {
-            if newValue {
-                imageView.makeCornerStyle(5, Constant.Color.point.cgColor, 0)
-            } else {
-                imageView.makeCornerStyle(0, nil, 0)
-            }
-        }
-    }
+//    override var isSelected: Bool {
+//        willSet {
+//            if newValue {
+//                imageView.makeCornerStyle(5, Constant.Color.point.cgColor, 0)
+//            } else {
+//                imageView.makeCornerStyle(0, nil, 0)
+//            }
+//        }
+//    }
     
-    private let imageView = UIImageView()
+    let imageView = UIImageView()
     
     // MARK: - Initializer
     

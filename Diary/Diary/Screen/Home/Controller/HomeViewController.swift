@@ -24,8 +24,7 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Property
     
-    var filterText = ""
-    
+    // UIMenu
     var menuItems: [UIAction] {
         return [recentMenu, oldMenu, titleMenu, favoriteMenu, filterMenu]
     }
@@ -107,7 +106,7 @@ final class HomeViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        navigationItem.title = "후리방구 일기장"
+        navigationItem.title = "🦋후리방구 일기장🦋"
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = plusBarButton
     }
@@ -121,8 +120,8 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Custom Method
     
+    // 4. Realm의 데이터를 정렬해서 배열에 담기
     func fetchRealmData(_ keyPath: String = "createdAt", _ ascending: Bool = true) {
-        // 4. Realm의 데이터를 정렬해서 배열에 담기
         self.tasks = localRealm.objects(UserDiary.self).sorted(byKeyPath: keyPath, ascending: ascending)
     }
     
@@ -145,6 +144,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.id, for: indexPath) as? HomeTableViewCell
         else { return UITableViewCell() }
         cell.setupData(data: tasks[indexPath.row])
+        cell.diaryImageView.image = loadImageFromDocument(fileName: "\(tasks[indexPath.row].objectId).jpg")
         return cell
     }
     

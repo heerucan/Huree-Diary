@@ -38,7 +38,7 @@ class HomeTableViewCell: UITableViewCell {
     
     let diaryImageView: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.backgroundColor = Constant.Color.point
         view.tintColor = Constant.Color.background
@@ -91,10 +91,9 @@ class HomeTableViewCell: UITableViewCell {
     // MARK: - Set Data
     
     func setupData(data: UserDiary) {
-        diaryImageView.image = data.image == nil ?
-        Constant.Image.photo.assets : UIImage(named: data.image!)
         dateLabel.text = data.updatedAt
         titleLabel.text = data.title
         contentLabel.text = data.content
+        diaryImageView.image = Constant.Image.image.assets
     }
 }

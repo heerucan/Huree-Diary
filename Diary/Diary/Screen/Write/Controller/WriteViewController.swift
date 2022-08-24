@@ -53,9 +53,7 @@ final class WriteViewController: BaseViewController {
         writerView.diaryTextView.delegate = self
     }
     
-    // MARK: - Custom Method
-    
-    func changeTextViewColor() {
+    private func changeTextViewColor() {
         if writerView.diaryTextView.text == Constant.Placeholder.diary.rawValue {
             writerView.diaryTextView.textColor = Constant.Color.placeholder
         } else {
@@ -63,7 +61,7 @@ final class WriteViewController: BaseViewController {
         }
     }
     
-    func presentImagePicker() {
+    private func presentImagePicker() {
         let picker = UIImagePickerController()
         picker.sourceType = .camera
         picker.allowsEditing = true
@@ -72,7 +70,7 @@ final class WriteViewController: BaseViewController {
         self.present(picker, animated: true)
     }
     
-    func presentPHPhotoPicker() {
+    private func presentPHPhotoPicker() {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 1
         configuration.filter = .any(of: [.images])
@@ -95,10 +93,8 @@ final class WriteViewController: BaseViewController {
     @objc func touchupImageButton(_ sender: UIButton) {
         showAlert("이미지 가져오기", button1: "카메라", button2: "갤러리", button3: "검색") { _ in
             self.presentImagePicker()
-            
         } handler2: { _ in
             self.presentPHPhotoPicker()
-            
         } handler3: { _ in
             let viewController = SearchImageViewController()
             viewController.imageCompletionHandler = { url in
@@ -108,6 +104,7 @@ final class WriteViewController: BaseViewController {
         }
     }
     
+    // ⭐️ Realm + 이미지 도큐먼트 저장
     @objc func touchupSaveButton() {
         // Create Record
         if let title = writerView.titleTextField.text,
@@ -118,11 +115,23 @@ final class WriteViewController: BaseViewController {
                                  createdAt: Date(),
                                  updatedAt: date,
                                  image: nil)
-            do {
-                try! localRealm.write {
-                    localRealm.add(task)
-                    print("Create Realm 성공!")
-                    transition(self, .dismiss)
+            
+            if title.isEmpty || date.isEmpty ||
+                content == Constant.Placeholder.diary.rawValue {
+                showAlertController("일기를 완성해주세요 🐜")
+            } else {
+                do {
+                    try localRealm.write {
+                        localRealm.add(task)
+                        print("Create Realm 성공!")
+                        transition(self, .dismiss)
+                    }
+                } catch let error {
+                    print(error)
+                }
+                
+                if let image = writerView.photoImageView.image {
+                    saveImageToDocument(fileName: "\(task.objectId).jpg", image: image)
                 }
             }
         }

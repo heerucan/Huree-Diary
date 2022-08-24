@@ -15,6 +15,8 @@ final class SearchImageViewController: BaseViewController {
     private var searchPage = 1
     private var imageList: [URL] = []
     private var index = 0
+    var selectedIndexPath: IndexPath?
+    var selectedImage: UIImage?
     
     var imageCompletionHandler: ((URL) -> ())?
     
@@ -102,11 +104,25 @@ extension SearchImageViewController: UICollectionViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchImageCollectionViewCell.id, for: indexPath) as? SearchImageCollectionViewCell
         else { return UICollectionViewCell() }
         cell.setupData(imageURL: imageList[indexPath.item])
+        cell.layer.borderWidth = selectedIndexPath == indexPath ? 5 : 0
+        cell.layer.borderColor = selectedIndexPath == indexPath ? Constant.Color.point.cgColor : nil
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         index = indexPath.item
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImageCollectionViewCell else { return }
+        selectedImage = cell.imageView.image
+        selectedIndexPath = indexPath
+//        selectedIndexPath?.row = !selectedIndexPath?.row
+        collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImageCollectionViewCell else { return }
+        selectedImage = cell.imageView.image
+        selectedIndexPath = indexPath
+        collectionView.reloadData()
     }
 }
 
