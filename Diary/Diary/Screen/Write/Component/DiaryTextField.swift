@@ -31,6 +31,15 @@ class DiaryTextField: UITextField {
                 return Constant.Placeholder.date.rawValue
             }
         }
+        
+        var defaultText: String? {
+            switch self {
+            case .title:
+                return nil
+            case .date:
+                return Date().toString()
+            }
+        }
     }
     
     // MARK: - Initializer
@@ -39,6 +48,7 @@ class DiaryTextField: UITextField {
         super.init(frame: .zero)
         self.keyboardType = type.keyboardType
         self.placeholder = type.placeholder
+        self.text = type.defaultText
         configureUI()
     }
     
