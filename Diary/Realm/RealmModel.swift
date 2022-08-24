@@ -18,7 +18,7 @@ import RealmSwift
 
 class UserDiary: Object {
     @Persisted var title: String
-    @Persisted var content: String?
+    @Persisted var content: String
     @Persisted var createdAt = Date() // 일기가 업로드 되는 실제 날짜
     @Persisted var updatedAt: String // 일기에 들어가는 날짜
     @Persisted var favorite: Bool // 즐겨찾기
@@ -28,7 +28,7 @@ class UserDiary: Object {
     @Persisted(primaryKey: true) var objectId: ObjectId
     
     convenience init(title: String,
-                     content: String?,
+                     content: String,
                      createdAt: Date,
                      updatedAt: String,
                      image: String?) {

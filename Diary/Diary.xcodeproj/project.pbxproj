@@ -11,6 +11,7 @@
 		5B00C97C28B3E15500666F12 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5B00C97B28B3E15500666F12 /* IQKeyboardManagerSwift */; };
 		5B00C98C28B45BF400666F12 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B00C98B28B45BF400666F12 /* Date+.swift */; };
 		5B00C98E28B461F100666F12 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B00C98D28B461F100666F12 /* UIViewController+.swift */; };
+		5B7794A128B5D26E00E62ACD /* FileManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7794A028B5D26E00E62ACD /* FileManager+.swift */; };
 		5BB0397E28B23F06009B8DE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0397D28B23F06009B8DE2 /* AppDelegate.swift */; };
 		5BB0398028B23F06009B8DE2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0397F28B23F06009B8DE2 /* SceneDelegate.swift */; };
 		5BB0398528B23F06009B8DE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB0398328B23F06009B8DE2 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		5B00C97828B3DA1D00666F12 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		5B00C98B28B45BF400666F12 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		5B00C98D28B461F100666F12 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		5B7794A028B5D26E00E62ACD /* FileManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+.swift"; sourceTree = "<group>"; };
 		5BB0397A28B23F06009B8DE2 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB0397D28B23F06009B8DE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BB0397F28B23F06009B8DE2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -182,10 +184,11 @@
 		5BB0399628B23F67009B8DE2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				5B00C98B28B45BF400666F12 /* Date+.swift */,
+				5B7794A028B5D26E00E62ACD /* FileManager+.swift */,
+				5BB039BD28B25E4F009B8DE2 /* Transition+.swift */,
 				5BB039AC28B244FC009B8DE2 /* UIView+.swift */,
 				5B00C98D28B461F100666F12 /* UIViewController+.swift */,
-				5BB039BD28B25E4F009B8DE2 /* Transition+.swift */,
-				5B00C98B28B45BF400666F12 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				5BB039AD28B244FC009B8DE2 /* UIView+.swift in Sources */,
 				5BB039B928B2493D009B8DE2 /* SearchImageCollectionViewCell.swift in Sources */,
 				5BB039A428B24028009B8DE2 /* SearchImageViewController.swift in Sources */,
+				5B7794A128B5D26E00E62ACD /* FileManager+.swift in Sources */,
 				5BB039C128B2B12D009B8DE2 /* WriteView.swift in Sources */,
 				5BB0397E28B23F06009B8DE2 /* AppDelegate.swift in Sources */,
 				5BD5513628B54ED40045A62A /* ErrorType.swift in Sources */,
