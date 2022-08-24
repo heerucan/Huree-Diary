@@ -129,8 +129,8 @@ final class HomeViewController: BaseViewController {
     // MARK: - @objc
     
     @objc func touchupPlusBarButton() {
-        let viewController = UINavigationController(rootViewController: WriteViewController())
-        transition(viewController)
+        let viewController = WriteViewController()
+        transition(viewController, .presentFullNavigation)
     }
 }
 
@@ -150,11 +150,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let viewController = UINavigationController(rootViewController: WriteViewController())
-        transition(viewController, .present) { viewController in
-            guard let view = viewController.viewControllers.last as? WriteViewController else { return }
-            view.viewType = .Edit
-            view.writerView.setupData(data: self.tasks[indexPath.row])
+        let viewController = WriteViewController()
+        transition(viewController, .presentFullNavigation) { viewController in
+            viewController.viewType = .Edit
+            viewController.writerView.setupData(data: self.tasks[indexPath.row])
         }
     }
     

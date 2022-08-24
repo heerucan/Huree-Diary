@@ -87,7 +87,7 @@ final class SearchImageViewController: BaseViewController {
     
     @objc func touchupRightBarButton() {
         imageCompletionHandler?(imageList[index])
-        navigationController?.popViewController(animated: true)
+        transition(self, .pop)
     }
 }
 

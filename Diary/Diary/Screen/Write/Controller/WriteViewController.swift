@@ -89,9 +89,7 @@ final class WriteViewController: BaseViewController {
     
     @objc func touchupCloseButton() {
         let presentingViewController = HomeViewController()
-        dismiss(animated: true) {
-            presentingViewController.viewWillAppear(true)
-        }
+        transition(presentingViewController, .presentedViewDismiss)
     }
     
     @objc func touchupImageButton(_ sender: UIButton) {
@@ -124,7 +122,7 @@ final class WriteViewController: BaseViewController {
                 try! localRealm.write {
                     localRealm.add(task)
                     print("Create Realm 성공!")
-                    dismiss(animated: true)
+                    transition(self, .dismiss)
                 }
             }
         }
@@ -170,10 +168,10 @@ extension WriteViewController: PHPickerViewControllerDelegate, UINavigationContr
     // UIImagePickerControllerDelegate, UINavigationControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
-            picker.dismiss(animated: true)
+            picker.transition(self, .dismiss)
             return
         }
         self.writerView.photoImageView.image = image
-        picker.dismiss(animated: true, completion: nil)
+        picker.transition(self, .dismiss)
     }
 }
