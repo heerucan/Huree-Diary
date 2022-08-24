@@ -17,6 +17,10 @@ struct Constant {
         case menu
         case filter
         case heart
+        case unselectedHome
+        case selectedHome
+        case unselectedSetting
+        case selectedSetting
         
         var assets: UIImage? {
             switch self {
@@ -34,6 +38,14 @@ struct Constant {
                 return UIImage(systemName: "eyes")
             case .heart:
                 return UIImage(systemName: "heart")
+            case .unselectedHome:
+                return UIImage(systemName: "book.closed")
+            case .selectedHome:
+                return UIImage(systemName: "book.closed.fill")
+            case .unselectedSetting:
+                return UIImage(systemName: "gearshape")
+            case .selectedSetting:
+                return UIImage(systemName: "gearshape.fill")
             }
         }
     }

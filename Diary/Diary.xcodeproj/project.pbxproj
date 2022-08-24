@@ -12,6 +12,9 @@
 		5B00C98C28B45BF400666F12 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B00C98B28B45BF400666F12 /* Date+.swift */; };
 		5B00C98E28B461F100666F12 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B00C98D28B461F100666F12 /* UIViewController+.swift */; };
 		5B7794A128B5D26E00E62ACD /* FileManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7794A028B5D26E00E62ACD /* FileManager+.swift */; };
+		5B7794A428B5FD6000E62ACD /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7794A328B5FD6000E62ACD /* TabBarViewController.swift */; };
+		5B7794A728B5FFED00E62ACD /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7794A628B5FFED00E62ACD /* SettingViewController.swift */; };
+		5B7794AB28B6673700E62ACD /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7794AA28B6673700E62ACD /* SettingTableViewCell.swift */; };
 		5BB0397E28B23F06009B8DE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0397D28B23F06009B8DE2 /* AppDelegate.swift */; };
 		5BB0398028B23F06009B8DE2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0397F28B23F06009B8DE2 /* SceneDelegate.swift */; };
 		5BB0398528B23F06009B8DE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB0398328B23F06009B8DE2 /* Main.storyboard */; };
@@ -48,6 +51,9 @@
 		5B00C98B28B45BF400666F12 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		5B00C98D28B461F100666F12 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		5B7794A028B5D26E00E62ACD /* FileManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+.swift"; sourceTree = "<group>"; };
+		5B7794A328B5FD6000E62ACD /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		5B7794A628B5FFED00E62ACD /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		5B7794AA28B6673700E62ACD /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		5BB0397A28B23F06009B8DE2 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB0397D28B23F06009B8DE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BB0397F28B23F06009B8DE2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +107,39 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		5B7794A228B5FD3300E62ACD /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				5B7794A328B5FD6000E62ACD /* TabBarViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		5B7794A528B5FFCB00E62ACD /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				5B7794A928B6672500E62ACD /* Cell */,
+				5B7794A828B6671E00E62ACD /* Controller */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		5B7794A828B6671E00E62ACD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5B7794A628B5FFED00E62ACD /* SettingViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5B7794A928B6672500E62ACD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5B7794AA28B6673700E62ACD /* SettingTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		5BB0397128B23F06009B8DE2 = {
 			isa = PBXGroup;
 			children = (
@@ -144,9 +183,11 @@
 		5BB0399228B23F1B009B8DE2 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				5B7794A228B5FD3300E62ACD /* TabBar */,
 				5BB039ED28B32A8F009B8DE2 /* Home */,
 				5BB039A028B23FFF009B8DE2 /* Write */,
 				5BB0399F28B23FF9009B8DE2 /* Search */,
+				5B7794A528B5FFCB00E62ACD /* Setting */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -395,6 +436,7 @@
 				5BB039AD28B244FC009B8DE2 /* UIView+.swift in Sources */,
 				5BB039B928B2493D009B8DE2 /* SearchImageCollectionViewCell.swift in Sources */,
 				5BB039A428B24028009B8DE2 /* SearchImageViewController.swift in Sources */,
+				5B7794A728B5FFED00E62ACD /* SettingViewController.swift in Sources */,
 				5B7794A128B5D26E00E62ACD /* FileManager+.swift in Sources */,
 				5BB039C128B2B12D009B8DE2 /* WriteView.swift in Sources */,
 				5BB0397E28B23F06009B8DE2 /* AppDelegate.swift in Sources */,
@@ -403,8 +445,10 @@
 				5B00C97928B3DA1D00666F12 /* HomeTableViewCell.swift in Sources */,
 				5B00C98C28B45BF400666F12 /* Date+.swift in Sources */,
 				5BB0399A28B23F99009B8DE2 /* APIKey.swift in Sources */,
+				5B7794AB28B6673700E62ACD /* SettingTableViewCell.swift in Sources */,
 				5BB039A228B24015009B8DE2 /* WriteViewController.swift in Sources */,
 				5BB039B428B248F3009B8DE2 /* Protocol.swift in Sources */,
+				5B7794A428B5FD6000E62ACD /* TabBarViewController.swift in Sources */,
 				5BB0398028B23F06009B8DE2 /* SceneDelegate.swift in Sources */,
 				5BB039BB28B2541E009B8DE2 /* DiaryTextField.swift in Sources */,
 				5BB039BE28B25E4F009B8DE2 /* Transition+.swift in Sources */,

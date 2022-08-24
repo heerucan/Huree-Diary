@@ -13,7 +13,8 @@ extension UIViewController {
         /* Document 경로
          FileManager : 파일 처리와 관련된 대부분의 작업을 수행하고 싱글톤
         */
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        else { return }
         
         // Document 경로에서 세부 파일 경로를 지정, 이미지 저장할 위치
         let fileURL = documentDirectory.appendingPathComponent(fileName)
@@ -34,7 +35,8 @@ extension UIViewController {
     
     // ⭐️ Document에서 이미지 가져오기
     func loadImageFromDocument(fileName: String) -> UIImage? {
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        else { return nil }
         
         // Document 경로에서 세부 파일 경로를 지정, 이미지 저장할 위치
         let fileURL = documentDirectory.appendingPathComponent(fileName)
@@ -49,7 +51,8 @@ extension UIViewController {
     
     // ⭐️ Document에서 이미지 삭제하기
     func removeImageFromDocument(fileName: String) {
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        else { return }
         let fileURL = documentDirectory.appendingPathComponent(fileName)
         
         do {

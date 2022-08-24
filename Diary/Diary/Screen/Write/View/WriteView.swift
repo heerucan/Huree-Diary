@@ -17,7 +17,6 @@ class WriteView: BaseView, UITextViewDelegate {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.backgroundColor = Constant.Color.background
-//        view.image = Constant.Image.image.assets
         view.tintColor = Constant.Color.lightGray
         view.makeCornerStyle()
         return view
