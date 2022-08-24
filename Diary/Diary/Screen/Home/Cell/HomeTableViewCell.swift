@@ -94,6 +94,5 @@ class HomeTableViewCell: UITableViewCell {
         dateLabel.text = data.updatedAt
         titleLabel.text = data.title
         contentLabel.text = data.content
-        diaryImageView.image = Constant.Image.image.assets
     }
 }

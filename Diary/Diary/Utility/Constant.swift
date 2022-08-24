@@ -54,7 +54,7 @@ struct Constant {
         static let background = UIColor.systemBackground
         static let border = UIColor.black.cgColor
         static let placeholder = UIColor.systemGray3
-        static let point = UIColor.systemGreen
+        static let point = UIColor.systemTeal
         static let black = UIColor.black
         static let lightGray = UIColor.systemGray5
     }

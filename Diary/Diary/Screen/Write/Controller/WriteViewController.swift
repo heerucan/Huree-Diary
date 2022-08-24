@@ -20,6 +20,7 @@ final class WriteViewController: BaseViewController {
     
     var viewType: ViewType = .Write
     let writerView = WriteView()
+    var objectId: ObjectId?
     
     lazy var closeButton = UIBarButtonItem(image: Constant.Image.close.assets,
                                            style: .done,
@@ -47,6 +48,8 @@ final class WriteViewController: BaseViewController {
         writerView.imageButton.addTarget(self, action: #selector(touchupImageButton(_:)), for: .touchUpInside)
         writerView.saveButton.addTarget(self, action: #selector(touchupSaveButton), for: .touchUpInside)
         writerView.datePickerView.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
+        guard let objectId = objectId else { return }
+        writerView.photoImageView.image = loadImageFromDocument(fileName: "\(objectId).jpg")
     }
     
     override func configureDelegate() {
@@ -104,34 +107,48 @@ final class WriteViewController: BaseViewController {
         }
     }
     
-    // ⭐️ Realm + 이미지 도큐먼트 저장
+    // ⭐️ Realm + 이미지 도큐먼트 저장 및 수정
     @objc func touchupSaveButton() {
+        guard let title = writerView.titleTextField.text,
+              let date = writerView.dateTextField.text,
+              let content = writerView.diaryTextView.text else { return }
+        
         // Create Record
-        if let title = writerView.titleTextField.text,
-           let date = writerView.dateTextField.text,
-           let content = writerView.diaryTextView.text {
-            let task = UserDiary(title: title,
-                                 content: content,
-                                 createdAt: Date(),
-                                 updatedAt: date,
-                                 image: nil)
-            
-            if title.isEmpty || date.isEmpty ||
-                content == Constant.Placeholder.diary.rawValue {
-                showAlertController("일기를 완성해주세요 🐜")
-            } else {
-                do {
-                    try localRealm.write {
+        let task = UserDiary(title: title, content: content, createdAt: Date(), updatedAt: date, image: nil)
+        
+        if title.isEmpty || date.isEmpty ||
+            content == Constant.Placeholder.diary.rawValue {
+            showAlertController("일기를 완성해주세요 🐜")
+        } else {
+            do {
+                try localRealm.write {
+                    if viewType == .Write {
                         localRealm.add(task)
-                        print("Create Realm 성공!")
+                        print("Create Realm 성공!", task)
+                        transition(self, .dismiss)
+                    } else {
+                        guard let objectId = objectId else { return }
+                        localRealm.create(
+                            UserDiary.self,
+                            value:["objectId": objectId,
+                                   "content": content,
+                                   "title": title,
+                                   "updatedAt": date],
+                            update: .modified)
+                        print("Update Realm 성공!")
                         transition(self, .dismiss)
                     }
-                } catch let error {
-                    print(error)
                 }
-                
-                if let image = writerView.photoImageView.image {
+            } catch let error {
+                print(error)
+            }
+            
+            if let image = writerView.photoImageView.image {
+                if viewType == .Write {
                     saveImageToDocument(fileName: "\(task.objectId).jpg", image: image)
+                } else {
+                    guard let objectId = objectId else { return }
+                    saveImageToDocument(fileName: "\(objectId).jpg", image: image)
                 }
             }
         }
