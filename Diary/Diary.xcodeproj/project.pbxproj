@@ -42,6 +42,7 @@
 		5BB039E628B31674009B8DE2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5BB039E528B31674009B8DE2 /* RealmSwift */; };
 		5BB039EC28B31A2C009B8DE2 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039EB28B31A2C009B8DE2 /* RealmModel.swift */; };
 		5BB039F028B32AA0009B8DE2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB039EF28B32AA0009B8DE2 /* HomeViewController.swift */; };
+		5BBC150D28B7016C00E4F281 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 5BBC150C28B7016C00E4F281 /* Zip */; };
 		5BC1FF1A28B49EDF00B144CD /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1FF1928B49EDF00B144CD /* ViewType.swift */; };
 		5BD5513628B54ED40045A62A /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5513528B54ED40045A62A /* ErrorType.swift */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,7 @@
 				5BB039CA28B2B5CA009B8DE2 /* SwiftyJSON in Frameworks */,
 				5BB039AB28B24458009B8DE2 /* SnapKit in Frameworks */,
 				5BB039C728B2B5BF009B8DE2 /* Alamofire in Frameworks */,
+				5BBC150D28B7016C00E4F281 /* Zip in Frameworks */,
 				5BB039E428B31674009B8DE2 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +371,7 @@
 				5BB039E328B31674009B8DE2 /* Realm */,
 				5BB039E528B31674009B8DE2 /* RealmSwift */,
 				5B00C97B28B3E15500666F12 /* IQKeyboardManagerSwift */,
+				5BBC150C28B7016C00E4F281 /* Zip */,
 			);
 			productName = Diary;
 			productReference = 5BB0397A28B23F06009B8DE2 /* Diary.app */;
@@ -405,6 +408,7 @@
 				5BB039D628B30B78009B8DE2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				5BB039E228B31674009B8DE2 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				5B00C97A28B3E15500666F12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				5BBC150B28B7016C00E4F281 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 5BB0397B28B23F06009B8DE2 /* Products */;
 			projectDirPath = "";
@@ -731,6 +735,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		5BBC150B28B7016C00E4F281 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -768,6 +780,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5BB039E228B31674009B8DE2 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		5BBC150C28B7016C00E4F281 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5BBC150B28B7016C00E4F281 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
