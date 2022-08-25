@@ -33,12 +33,23 @@ extension UIViewController {
     }
     
     func showAlertController(_ title: String) {
-        
         let alert = UIAlertController(title: title,
-                                      message: "",
+                                      message: nil,
                                       preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .cancel)
         alert.addAction(ok)
         self.present(alert, animated: true)
+    }
+
+    func showActivityController(backupURL: String) {
+        // 도큐먼트 위치에 백업 파일 확인
+        guard let path = documentDirectoryPath() else {
+            showAlertController("도큐먼트 위치에 오류가 있습니다.")
+            return
+        }
+        
+        let backupFileURL = path.appendingPathComponent("Huree-Diary.zip")
+        let viewController = UIActivityViewController(activityItems: [backupFileURL], applicationActivities: nil)
+        transition(viewController, .present)
     }
 }

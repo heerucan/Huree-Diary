@@ -8,6 +8,13 @@
 import UIKit
 
 extension UIViewController {
+    // ⭐️ FileManager를 통해서 Document의 경로를 가져오는데 못 찾을 시 옵셔널 반환
+    func documentDirectoryPath() -> URL? {
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        else { return nil }
+        return documentDirectory
+    }
+    
     // ⭐️ Realm에 데이터도 저장하고 + Document에 이미지 저장
     func saveImageToDocument(fileName: String, image: UIImage) {
         /* Document 경로
