@@ -89,14 +89,15 @@ final class SettingViewController: BaseViewController {
         
         // 도큐먼트 위치 확인
         guard let path = documentDirectoryPath() else {
-            showAlertController("도큐먼트 위치에 오류가 있습니다.")
+            showAlertController("😱 도큐먼트 위치에 오류가 있습니다.")
             return
         }
         
         // 근데 realmFile이 없을 수 있어서 유효한 지 확인이 필요
         let realmFile = path.appendingPathComponent("default.realm")
         
-        guard FileManager.default.fileExists(atPath: realmFile.path) else { showAlertController("백업할 파일이 없습니다.")
+        guard FileManager.default.fileExists(atPath: realmFile.path) else {
+            showAlertController("백업할 파일이 없습니다.")
             return
         }
         
@@ -112,7 +113,7 @@ final class SettingViewController: BaseViewController {
             showActivityController(backupURL: "Huree-Diary.zip")
 
         } catch {
-            showAlertController("압축을 실패했습니다!!")
+            showAlertController("🤯 압축을 실패했습니다!!")
         }
     }
     
@@ -143,5 +144,73 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - UIDocumentPickerDelegate
 
 extension SettingViewController: UIDocumentPickerDelegate {
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("도큐먼트 피커를 닫았다")
+    }
     
+    // 문서 선택 후 뭘 해줄 것임?
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        // 선택한 파일url을 가져옴
+        guard let selectedFileURL = urls.first else {
+            showAlertController("🥵 선택한 파일에 오류가 있습니다!!")
+            return
+        }
+        
+        // 도큐먼트 위치 확인
+        guard let path = documentDirectoryPath() else {
+            showAlertController("😱 도큐먼트 위치에 오류가 있습니다.")
+            return
+        }
+        
+        // 복구파일을 우리 앱에 다시 넣어줄 경로 = 도큐먼트 경로 + 선택한 파일 url의 마지막 path
+        let sandboxFileURL = path.appendingPathComponent(selectedFileURL.lastPathComponent)
+        
+        
+        // 도큐먼트 위치에 해당 파일이 있으면
+        if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
+            
+            let fileURL = path.appendingPathComponent("Huree-Diary.zip")
+            
+            do {
+                
+                // 어떤 파일을?, 어디에 압축풀까?, 덮어씌워줄까?, 비번을 설정할까?, 얼마나 진행되고 있는지?, 다 풀어주고 나면 뭐할까?
+                // 기존 default.realm 파일을 덮어씌워줌
+                try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { progress in
+                    print("진행 정도:", progress)
+                    
+                }, fileOutputHandler: { unzippedFile in
+                    print("복구 파일:", unzippedFile)
+                    self.showAlertController("😚 복구가 완료되었습니다><")
+                })
+                
+            } catch {
+                showAlertController("복구한 파일이 없습니다.")
+            }
+            
+        } else { // 파일이 없으면 -> 파일앱에 있는 걸 이동시켜 copy하는 과정이 필요
+            
+            do {
+                
+                // 파일 앱에서 선택한 파일을 Document 폴더에 복사
+                // at : 원래 있던 파일 -> to : 여기에 복사하겟당!!~
+                // 무제파일 -> 무제파일1 -> 무제파일2 이렇게 계속 생성되잖아,,? 동일한 파일이 있으면?
+                // => 동일한 파일이 있으면 덮어주는 게 default임
+                // sandboxFileURL이라는 경로에 넣어줄 것을 의미함
+                try FileManager.default.copyItem(at: selectedFileURL, to: sandboxFileURL)
+                
+                let fileURL = path.appendingPathComponent("Huree-Diary.zip")
+                
+                try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { progress in
+                    print("진행 정도:", progress)
+                    
+                }, fileOutputHandler: { unzippedFile in
+                    print("복구 파일:", unzippedFile)
+                    self.showAlertController("😚 복구가 완료되었습니다><")
+                })
+                
+            } catch {
+                showAlertController("압축 해제에 실패했습니다ㅠㅠ")
+            }
+        }
+    }
 }
