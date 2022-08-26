@@ -7,6 +7,7 @@
 
 import UIKit
 
+import FSCalendar
 import RealmSwift // 1. import
 import Kingfisher
 
@@ -82,6 +83,16 @@ final class HomeViewController: BaseViewController {
                                              style: .done, target: self,
                                              action: #selector(touchupPlusBarButton))
     
+    lazy var calendar: FSCalendar = {
+        let view = FSCalendar()
+        view.delegate = self
+        view.dataSource = self
+        view.backgroundColor = Constant.Color.background
+        view.appearance.selectionColor = Constant.Color.point
+        view.appearance.todayColor = .systemOrange
+        return view
+    }()
+    
     lazy var homeTableView: UITableView = {
         let view = UITableView()
         view.rowHeight = UITableView.automaticDimension
@@ -112,9 +123,16 @@ final class HomeViewController: BaseViewController {
     }
     
     override func configureLayout() {
-        view.addSubview(homeTableView)
+        view.addSubviews([calendar, homeTableView])
+        
+        calendar.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(300)
+        }
+        
         homeTableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(calendar.snp.bottom).offset(30)
+            make.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -187,4 +205,33 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         favorite.backgroundColor = .systemPink
         return UISwipeActionsConfiguration(actions: [favorite])
     }
+}
+ 
+// MARK: - FSCalendarDelegate, FSCalendarDataSource
+
+extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource {
+//    func calendar(_ calendar: FSCalendar, titleFor date: Date) -> String? {
+//        return "🦋"
+//    }
+    
+    func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
+        return date.toString() == "2022.08.26" ? "🦋" : nil
+    }
+    
+//    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+//        return Constant.Image.filter.assets
+//    }
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        tasks = repository.fetchDate(date: date)
+        return tasks.count
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        tasks = repository.fetchDate(date: date)
+    }
+    
+//    func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
+//        "🦋"
+//    }
 }

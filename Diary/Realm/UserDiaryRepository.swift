@@ -16,6 +16,7 @@ protocol UserDiaryRepositoryType {
     func updateFavorite(item: UserDiary)
     func deleteItem(item: UserDiary)
     func addItme(item: UserDiary)
+    func fetchDate(date: Date) -> Results<UserDiary>
 }
 
 // 아래 클래스는 위 프로토콜을 채택하기에 해당 메소드를 필수로 구현해!
@@ -33,6 +34,12 @@ class UserDiaryRepository: UserDiaryRepositoryType {
     
     func fetchFilter(query: String) -> Results<UserDiary> {
         return localRealm.objects(UserDiary.self).filter("title CONTAINS '"+query+"'" )
+    }
+    
+    func fetchDate(date: Date) -> Results<UserDiary> {
+        return localRealm.objects(UserDiary.self).filter("createdAt >= %@ AND createdAt < %@",
+                                                         date,
+                                                         Date(timeInterval: 86400, since: date)) // NSPredicate 하루뒤
     }
     
     func updateFavorite(item: UserDiary) {
