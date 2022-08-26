@@ -56,16 +56,29 @@ extension UIViewController {
         }
     }
     
-    // ⭐️ Document에서 이미지 삭제하기
-    func removeImageFromDocument(fileName: String) {
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        else { return }
-        let fileURL = documentDirectory.appendingPathComponent(fileName)
+    // Document에서 ZipFile 가져오기
+    func fetchDocumentZipFile() {
         
         do {
-            try FileManager.default.removeItem(at: fileURL)
-        } catch let error {
-            print(error)
+            guard let path = documentDirectoryPath() else {
+                showAlertController("도큐먼트 경로를 가져오지 못했습니다.")
+                return
+            }
+            
+            let docs = try FileManager.default.contentsOfDirectory(at: path,  includingPropertiesForKeys: nil)
+            print("🛟 docs:", docs)
+            
+            // [URL] 배열 중에서 zip 확장자만 가져오는 것임
+            let zip = docs.filter { $0.pathExtension == "zip" }
+            print("🛟 zip:", zip)
+            
+            let result = zip.map { $0.lastPathComponent }
+            print("🛟 result:", result
+            )
+//            return result
+            
+        } catch {
+            print("ERROR")
         }
     }
 }

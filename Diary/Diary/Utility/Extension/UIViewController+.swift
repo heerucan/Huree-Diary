@@ -32,12 +32,29 @@ extension UIViewController {
         self.present(alert, animated: true)
     }
     
-    func showAlertController(_ title: String) {
+    enum OKType {
+        case ok
+        case moreAction
+    }
+    
+    func showAlertController(_ title: String, type: OKType = .ok) {
         let alert = UIAlertController(title: title,
                                       message: nil,
                                       preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .cancel)
-        alert.addAction(ok)
+        switch type {
+        case .ok:
+            let ok = UIAlertAction(title: "확인", style: .cancel)
+            alert.addAction(ok)
+        case .moreAction:
+            let ok = UIAlertAction(title: "확인", style: .default) { _ in
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let sceneDelegate = windowScene?.delegate as? SceneDelegate
+                let viewController = TabBarViewController()
+                sceneDelegate?.window?.rootViewController = viewController
+                sceneDelegate?.window?.makeKeyAndVisible()
+            }
+            alert.addAction(ok)
+        }        
         self.present(alert, animated: true)
     }
 

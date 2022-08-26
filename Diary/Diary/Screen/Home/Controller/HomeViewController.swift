@@ -14,7 +14,7 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Realm
     
-    let localRealm = try! Realm() // 2. Realm 경로 가져오기
+    let repository = UserDiaryRepository() // 2. Realm 경로 가져오기
     var tasks: Results<UserDiary>! { // 3. Realm 데이터를 담을 배열 만들기
         didSet { // 해당 프로퍼티의 값이 변화되는 시점마다 테이블뷰가 갱신될 것
             homeTableView.reloadData()
@@ -59,7 +59,7 @@ final class HomeViewController: BaseViewController {
             guard let textFields = alert.textFields else { return }
             guard let text = textFields[0].text else { return }
             //특정 키워드 기준으로 필터해주고, ' ' 따옴표가 있어야 한다.
-            self.tasks = self.localRealm.objects(UserDiary.self).filter("title CONTAINS '"+text+"'" )
+            self.tasks = self.repository.fetchFilter(query: text)
         }
         
         let cancel = UIAlertAction(title: "취소", style: .default)
@@ -122,7 +122,7 @@ final class HomeViewController: BaseViewController {
     
     // 4. Realm의 데이터를 정렬해서 배열에 담기
     func fetchRealmData(_ keyPath: String = "createdAt", _ ascending: Bool = true) {
-        self.tasks = localRealm.objects(UserDiary.self).sorted(byKeyPath: keyPath, ascending: ascending)
+        self.tasks = repository.fetch(keyPath: keyPath, ascending: ascending)
     }
     
     // MARK: - @objc
@@ -161,13 +161,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
-            do {
-                /* realm delete */
-                try? self.localRealm.write {
-                    self.localRealm.delete(self.tasks[indexPath.row])
-                    print("Delete 성공!")
-                }
-            }
+            repository.deleteItem(item: tasks[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         }
@@ -176,33 +170,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let favorite = UIContextualAction(style: .normal, title: nil) { _, _, completion in
             
-            do {
-                /* realm update */
-                try self.localRealm.write {
-                    /* 이거는 하나만 바뀜 */
-                     self.tasks[indexPath.row].favorite = !self.tasks[indexPath.row].favorite
-                    
-                    /* 하나의 테이블에 특정 컬럼 전체를 변경
-                     => 하나만 바꾸면 다른 것도 다 바뀜
-                     self.tasks.setValue(true, forKey: "favorite") */
-                    
-                    /* 하나의 레코드에서 여러 컬럼들이 변경
-                     => 루희야 이거 컬럼이야! 다른 레코드가 아님! 컬럼들이 바뀐다고!!
-                    self.localRealm.create(UserDiary.self,
-                                           value: [
-                                            "objectId": self.tasks[indexPath.row].objectId,
-                                            "content": "내용 변경 테스트",
-                                            "title": "제목 변경 테스트"],
-                                           update: .modified)*/
-                }
-            } catch let error {
-                print(error)
-            }
+            self.repository.updateFavorite(item: self.tasks[indexPath.row])
             
-            // 하나의 record에서 하나만 reload하니까 상대적으로 효율적임 -> 이게 좀 더 스무스하긴 하네.. 내 취향이네..
-            self.homeTableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
-            /* 데이터가 변경됐으니 다시 realm에서 데이터를 가지고 오기 => didSet 일관적 형태로 갱신
-             self.fetchRealmData() */
+            /* 여기서도 didSet으로 프로퍼티가 변경 시마다 reload해주기 때문에 아래 코드는 주석처리해도 된다.
+             
+             하나의 record에서 하나만 reload하니까 상대적으로 효율적임 -> 이게 좀 더 스무스하긴 하네.. 내 취향이네..
+            // self.homeTableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
+            
+             데이터가 변경됐으니 다시 realm에서 데이터를 가지고 오기 => didSet 일관적 형태로 갱신
+            // self.fetchRealmData() */
         }
         
         // realm 데이터 기준으로 이미지 변경

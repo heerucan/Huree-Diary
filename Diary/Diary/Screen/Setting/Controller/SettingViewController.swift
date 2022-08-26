@@ -41,6 +41,7 @@ final class SettingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchDocumentZipFile()
     }
     
     // MARK: - Configure UI & Layout
@@ -180,7 +181,7 @@ extension SettingViewController: UIDocumentPickerDelegate {
                     
                 }, fileOutputHandler: { unzippedFile in
                     print("복구 파일:", unzippedFile)
-                    self.showAlertController("😚 복구가 완료되었습니다><")
+                    self.showAlertController("🥳 복구가 완료되었습니다.", type: .moreAction)
                 })
                 
             } catch {

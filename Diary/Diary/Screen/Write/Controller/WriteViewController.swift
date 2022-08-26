@@ -14,7 +14,7 @@ final class WriteViewController: BaseViewController {
         
     // MARK: - Realm
     
-    private let localRealm = try! Realm() // realm 테이블에 데이터를 CRUD할 때, realm 테이블 경로에 접근
+    let repository = UserDiaryRepository() // realm 테이블에 데이터를 CRUD할 때, realm 테이블 경로에 접근
     
     // MARK: - Property
     
@@ -121,14 +121,14 @@ final class WriteViewController: BaseViewController {
             showAlertController("일기를 완성해주세요 🐜")
         } else {
             do {
-                try localRealm.write {
+                try repository.localRealm.write {
                     if viewType == .Write {
-                        localRealm.add(task)
+                        repository.localRealm.add(task)
                         print("Create Realm 성공!", task)
                         transition(self, .dismiss)
                     } else {
                         guard let objectId = objectId else { return }
-                        localRealm.create(
+                        self.repository.localRealm.create(
                             UserDiary.self,
                             value:["objectId": objectId,
                                    "content": content,
