@@ -52,7 +52,7 @@ final class WriteViewController: BaseViewController {
         writerView.photoImageView.image = loadImageFromDocument(fileName: "\(objectId).jpg")
     }
     
-    override func configureDelegate() {
+    override func setupDelegate() {
         writerView.diaryTextView.delegate = self
     }
     
@@ -118,7 +118,7 @@ final class WriteViewController: BaseViewController {
         
         if title.isEmpty || date.isEmpty ||
             content == Constant.Placeholder.diary.rawValue {
-            showAlertController("일기를 완성해주세요 🐜")
+            showAlertController("옷 메모를 완성해주세요 🐜")
         } else {
             do {
                 try repository.localRealm.write {
@@ -201,3 +201,5 @@ extension WriteViewController: PHPickerViewControllerDelegate, UINavigationContr
         picker.transition(self, .dismiss)
     }
 }
+
+

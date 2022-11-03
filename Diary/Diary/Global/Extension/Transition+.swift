@@ -52,7 +52,6 @@ extension UIViewController {
             
         case .pop:
             navigationController?.popViewController(animated: true)
-            
         }
     }
 }

@@ -7,27 +7,24 @@
 
 import UIKit
 
-import SnapKit
-
-class BaseViewController: UIViewController {
-    
+class BaseViewController: UIViewController, BaseViewMethodType {
+        
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureLayout()
-        configureDelegate()
+        setupDelegate()
     }
     
     // MARK: - Configure UI & Layout
     
     func configureUI() {
-        navigationController?.navigationBar.tintColor = Constant.Color.black
-        navigationItem.backButtonTitle = ""
-        view.backgroundColor = Constant.Color.background
+        view.backgroundColor = .white
     }
     
     func configureLayout() { }
-    func configureDelegate() { }
+    func setupDelegate() { }
+    func bindViewModel() { }
 }

@@ -7,24 +7,25 @@
 
 import UIKit
 
-import SnapKit
-
-class BaseView: UIView {
-    
-    // MARK: - Initializer
-    
+class BaseView: UIView, BaseViewMethodType {
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
         configureLayout()
+        setupDelegate()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+        
+    func configureUI() {
+        backgroundColor = .white
+    }
     
-    // MARK: - Configure UI & Layout
-    
-    func configureUI() { }
     func configureLayout() { }
+    func setupDelegate() { }
+    func bindViewModel() { }
 }

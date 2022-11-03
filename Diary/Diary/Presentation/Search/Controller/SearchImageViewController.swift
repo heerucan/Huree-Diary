@@ -75,7 +75,7 @@ final class SearchImageViewController: BaseViewController {
         }
     }
     
-    override func configureDelegate() {
+    override func setupDelegate() {
         searchBar.delegate = self        
         collectionView.delegate = self
         collectionView.dataSource = self

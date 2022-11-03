@@ -8,7 +8,6 @@
 import UIKit
 
 struct Constant {
-    private init() { }
     enum Image {
         case photo
         case image
@@ -21,6 +20,8 @@ struct Constant {
         case selectedHome
         case unselectedSetting
         case selectedSetting
+        case unselectedCalendar
+        case selectedCalendar
         
         var assets: UIImage? {
             switch self {
@@ -46,6 +47,10 @@ struct Constant {
                 return UIImage(systemName: "gearshape")
             case .selectedSetting:
                 return UIImage(systemName: "gearshape.fill")
+            case .unselectedCalendar:
+                return UIImage(systemName: "calendar")
+            case .selectedCalendar:
+                return UIImage(systemName: "calendar.fill")
             }
         }
     }
@@ -61,7 +66,7 @@ struct Constant {
     
     enum Placeholder: String {
         case searchBar = "영어로 사진을 검색해주세요"
-        case diary = "일기를 작성해주세요"
+        case diary = "태그를 작성해주세요"
         case title = "제목을 작성해주세요"
         case date = "날짜를 선택해주세요"
         case filter = "찾고 싶은 일기의 키워드를 입력하세요"
